@@ -1,4 +1,4 @@
-use master
+﻿use master
 go
 
 CREATE DATABASE BanLinhKienDienTu
@@ -229,3 +229,98 @@ ADD FOREIGN KEY([MaPQ]) REFERENCES [PhanQuyen]([MaPQ])
 ON UPDATE NO ACTION ON DELETE CASCADE;
 GO
 
+-- NhaCungCap
+INSERT INTO NhaCungCap (MaNCC, TenNCC, Sdt, DiaChi, Email) 
+VALUES 
+('NCC001', N'Công ty Linh Kiện ABC', '0123456789', N'123 Đường XYZ, Hà Nội', 'abc@gmail.com'),
+('NCC002', N'Công ty Điện Tử 123', '0987654321', N'456 Đường PQR, TP HCM', '123@yahoo.com');
+
+-- LoaiSanPham  
+INSERT INTO LoaiSanPham (MaLoai, TenLoai)
+VALUES
+('LSP001', N'IC'),
+('LSP002', N'Transistor'),
+('LSP003', N'Điện trở');
+
+-- SanPham
+INSERT INTO SanPham (MaSP, TenSP, NgaySanXuat, GiaNhap, GiaBan, TrangThai, MaLoai)
+VALUES
+('SP001', N'IC 7400', '2023-01-01', 5000, 10000, 1, 'LSP001'),  
+('SP002', N'Transistor C1815', '2023-02-01', 2000, 5000, 1, 'LSP002'),
+('SP003', N'Điện trở 1K', '2023-03-01', 500, 1000, 1, 'LSP003');
+
+-- PhieuNhap
+INSERT INTO PhieuNhap (MaPN, NgayNhap, GiaNhap, SoLuong, ThanhTien, MaNCC, MaSP)
+VALUES
+('PN001', '2023-04-01', 5000, 100, 500000, 'NCC001', 'SP001'),
+('PN002', '2023-04-02', 2000, 200, 400000, 'NCC002', 'SP002');
+
+-- ChucVu
+INSERT INTO ChucVu (MaCV, TenCV) 
+VALUES
+('CV001', N'Quản lý'),
+('CV002', N'Nhân viên bán hàng');
+
+-- NhanVien
+INSERT INTO NhanVien (MaNV, Sdt, DiaChi, NgaySinh, GioiTinh, MaCV)
+VALUES  
+('NV001', '0123456789', N'Hà Nội', '1990-01-01', N'Nam', 'CV001'),
+('NV002', '0987654321', N'TP HCM', '1995-02-02', N'Nữ', 'CV002');
+
+-- KhachHang
+INSERT INTO KhachHang (MaKH, TenKH, DiaChi, Sdt, GioiTinh)
+VALUES
+('KH001', N'Nguyễn Văn A', N'Hà Nội', '0123456789', N'Nam'), 
+('KH002', N'Trần Thị B', N'TP HCM', '0987654321', N'Nữ');
+
+-- GioHang
+INSERT INTO GioHang (MaGH, SoLuong, ThanhTien, MaKH) 
+VALUES
+('GH001', 2, 20000, 'KH001'),
+('GH002', 1, 5000, 'KH002');
+
+-- SanPham_Gio
+INSERT INTO SanPham_Gio (MaSP, MaGH)
+VALUES  
+('SP001', 'GH001'),
+('SP002', 'GH002');
+
+-- HoaDon
+INSERT INTO HoaDon (MaHD, DonViTinh, DonGia, SoLuong, ThanhTien, NgayXuatHD, MaKH, MaNV)
+VALUES
+('HD001', N'Cái', 10000, 2, 20000, '2023-05-01', 'KH001', 'NV002'),  
+('HD002', N'Cái', 5000, 1, 5000, '2023-05-02', 'KH002', 'NV002');
+
+-- HoaDon_SanPham  
+INSERT INTO HoaDon_SanPham (MaHD, MaSP)
+VALUES
+('HD001', 'SP001'),
+('HD002', 'SP002');
+
+INSERT INTO NguoiDung (MaND, Email, MatKhau)
+VALUES 
+('ND001', 'user1@example.com', 'password1'),
+('ND002', 'user2@example.com', 'password2');
+
+INSERT INTO PhanQuyen (MaPQ, TenNhomQuyen)
+VALUES
+('PQ001', N'Quản trị viên'),  
+('PQ002', N'Nhân viên');
+
+INSERT INTO NguoiDung_PhanQuyen (MaND, MaPQ)
+VALUES
+('ND001', 'PQ001'),
+('ND002', 'PQ002');  
+
+INSERT INTO ChiTietPhanQuyen (MaCTPQ, QuyenDuocCapPhep, KiemTraHanhDong, MaPQ)
+VALUES  
+('CTPQ001', N'Xem báo cáo', 1, 'PQ001'),
+('CTPQ002', N'Thêm sản phẩm', 1, 'PQ002');
+
+INSERT INTO ThongKeHoaDon (MaTKHD, NgayBan, SoLuongDaBan, TongDonGiaBan, TongGiaBan, MaNV)  
+VALUES
+('TKHD001', '2023-05-31', 10, 100000, 1000000, 'NV002');
+
+INSERT INTO ThongKePhieuNhap (MaTKPN, SoLuongDaNhap, TongSoTienNhap, TongDonGiaNhap, MaNV)
+VALUES  
+('TKPN001', 50, 2500000, 50000, 'NV001');
