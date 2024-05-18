@@ -15,13 +15,19 @@ public class ConnectCSDL {
 
     public static Connection OpenConnection() throws Exception {
 
-        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        System.out.println("Tải...");
-        String url = "jdbc:sqlserver://localhost:1433;databasename=BanLinhKienDienTu;integratedSecurity=false;encrypt=false;trustServerCertificate=true;";
-        String user = "sa";
-        String password = "123";
-        Connection con = DriverManager.getConnection(url, user, password);
-        System.out.println("Kết nối...");
+        Connection con = null;
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            System.out.println("Tải driver");
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=BanLinhKienDienTu;integratedSecurity=false;encrypt=false;trustServerCertificate=true;";
+            String user = "sa";
+            String password = "123";
+            con = DriverManager.getConnection(url, user, password);
+            System.out.println("Kết nối thành công");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Kết nối thất bại: " + e.getMessage(), e);
+        }
         return con;
     }
 }

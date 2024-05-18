@@ -299,8 +299,8 @@ VALUES
 
 INSERT INTO NguoiDung (MaND, Email, MatKhau)
 VALUES 
-('ND001', 'user1@example.com', 'password1'),
-('ND002', 'user2@example.com', 'password2');
+('ND001', 'user1@example.com', '7c6a180b36896a0a8c02787eeafb0e4c'),
+('ND002', 'user2@example.com', '6cb75f652a9b52798eb6cf2201057c73');
 
 INSERT INTO PhanQuyen (MaPQ, TenNhomQuyen)
 VALUES
