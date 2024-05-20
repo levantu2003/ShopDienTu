@@ -4,7 +4,7 @@
  */
 package View.QuanLy;
 
-import DAO.NhaCungCapDAO;
+import DAO.QuanLy.NhaCungCapDAO;
 import Model.NhaCungCap;
 import javax.swing.JOptionPane;
 

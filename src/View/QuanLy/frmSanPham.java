@@ -4,7 +4,7 @@
  */
 package View.QuanLy;
 
-import DAO.SanPhamDAO;
+import DAO.QuanLy.SanPhamDAO;
 import Model.SanPham;
 import static java.lang.Float.parseFloat;
 import java.text.ParseException;

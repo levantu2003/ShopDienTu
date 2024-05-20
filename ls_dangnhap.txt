@@ -1,1 +1,1 @@
-user1@example.com,7c6a180b36896a0a8c02787eeafb0e4c
+user1@example.com,password1

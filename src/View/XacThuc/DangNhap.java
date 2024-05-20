@@ -6,9 +6,10 @@ package View.XacThuc;
 
 import static Controller.KiemSoatLoiInput.kiemtraEmail;
 import static Controller.KiemSoatLoiInput.kiemtraTrongInput;
-import DAO.MaHoaMD5;
-import DAO.XacThucDAO;
+import DAO.XacThuc.MaHoaMD5;
 import Model.NguoiDung;
+import View.Tong.FormMain;
+import java.awt.Color;
 import java.awt.HeadlessException;
 import java.io.BufferedReader;
 import java.io.File;
@@ -32,6 +33,7 @@ public class DangNhap extends javax.swing.JFrame {
         initComponents();
         setTitle("Đăng nhập");
         setLocationRelativeTo(null);
+        pnDangNhap.setBackground(new Color(175, 217, 243, 90));
         tudienDangNhap();
 
     }
@@ -53,7 +55,6 @@ public class DangNhap extends javax.swing.JFrame {
         lbDangNhap = new javax.swing.JLabel();
         btnLogIn = new javax.swing.JButton();
         ckDangNhap = new javax.swing.JCheckBox();
-        txtQuenMK = new javax.swing.JLabel();
         txtTaoTKMoi = new javax.swing.JLabel();
         txtMatKhau = new javax.swing.JPasswordField();
         hienMatKhau = new javax.swing.JLabel();
@@ -96,15 +97,6 @@ public class DangNhap extends javax.swing.JFrame {
         ckDangNhap.setForeground(new java.awt.Color(255, 255, 255));
         ckDangNhap.setText("Lưu đăng nhập");
 
-        txtQuenMK.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtQuenMK.setForeground(new java.awt.Color(255, 255, 255));
-        txtQuenMK.setText("Quên mật khẩu");
-        txtQuenMK.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtQuenMKMouseClicked(evt);
-            }
-        });
-
         txtTaoTKMoi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTaoTKMoi.setForeground(new java.awt.Color(255, 255, 255));
         txtTaoTKMoi.setText("Tạo tài khoản mới");
@@ -139,10 +131,7 @@ public class DangNhap extends javax.swing.JFrame {
                     .addGroup(pnDangNhapLayout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addGroup(pnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnDangNhapLayout.createSequentialGroup()
-                                .addComponent(ckDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtQuenMK, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ckDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnDangNhapLayout.createSequentialGroup()
                                 .addGroup(pnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(pnDangNhapLayout.createSequentialGroup()
@@ -152,11 +141,10 @@ public class DangNhap extends javax.swing.JFrame {
                                     .addGroup(pnDangNhapLayout.createSequentialGroup()
                                         .addComponent(lbMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(hienMatKhau)))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(73, 73, 73))
+                                        .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(hienMatKhau)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDangNhapLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,9 +170,7 @@ public class DangNhap extends javax.swing.JFrame {
                     .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(hienMatKhau))
                 .addGap(18, 18, 18)
-                .addGroup(pnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ckDangNhap)
-                    .addComponent(txtQuenMK))
+                .addComponent(ckDangNhap)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -199,12 +185,6 @@ public class DangNhap extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtQuenMKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuenMKMouseClicked
-        QuenMatKhau qk = new QuenMatKhau();
-        qk.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        qk.setVisible(true);
-    }//GEN-LAST:event_txtQuenMKMouseClicked
 
     private void txtTaoTKMoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTaoTKMoiMouseClicked
         DangKy dk = new DangKy();
@@ -222,7 +202,7 @@ public class DangNhap extends javax.swing.JFrame {
 
             String hashedPassword = md5.hashPassword(password);
 
-            XacThucDAO lg = new XacThucDAO();
+            DAO.XacThuc.DangNhapDAO lg = new DAO.XacThuc.DangNhapDAO();
             NguoiDung ndl = lg.dangNhap(user, hashedPassword);
 
             if (ndl == null) {
@@ -231,14 +211,13 @@ public class DangNhap extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Đăng nhập thành công");
                 System.out.println(hashedPassword);
                 if (ckDangNhap.isSelected()) {
-                    luuDangNhap(user, hashedPassword);
+                    luuDangNhap(user, password);
                 } else {
                     xoaDangNhap();
                 }
 
-                // MainFrame main = new MainFrame();
-                // main.setVisible(true);
-                // ketquaDangNhap = true;
+                FormMain main = new FormMain();
+                main.setVisible(true);
                 this.dispose();
             }
         }
@@ -279,10 +258,10 @@ public class DangNhap extends javax.swing.JFrame {
         hienMatKhau.setText(showPassword ? "Ẩn mật khẩu" : "Hiển thị mật khẩu");
     }
 
-    private void luuDangNhap(String email, String hashedPassword) {
+    private void luuDangNhap(String email, String password) {
         try {
             FileWriter writer = new FileWriter("ls_dangnhap.txt");
-            writer.write(email + "," + hashedPassword);
+            writer.write(email + "," + password);
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -378,7 +357,6 @@ public class DangNhap extends javax.swing.JFrame {
     private javax.swing.JPanel pnDangNhap;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JPasswordField txtMatKhau;
-    private javax.swing.JLabel txtQuenMK;
     private javax.swing.JLabel txtTaoTKMoi;
     // End of variables declaration//GEN-END:variables
 }

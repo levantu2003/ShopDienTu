@@ -4,7 +4,7 @@
  */
 package View.QuanLy;
 
-import DAO.NhanVienDAO;
+import DAO.QuanLy.NhanVienDAO;
 import Model.NhanVien;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

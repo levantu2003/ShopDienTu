@@ -4,9 +4,9 @@
  */
 package View.Tong;
 
-import DAO.NhaCungCapDAO;
-import DAO.NhanVienDAO;
-import DAO.SanPhamDAO;
+import DAO.QuanLy.NhaCungCapDAO;
+import DAO.QuanLy.NhanVienDAO;
+import DAO.QuanLy.SanPhamDAO;
 import Model.NhaCungCap;
 import Model.NhanVien;
 import Model.SanPham;
@@ -32,13 +32,13 @@ public class FormMain extends javax.swing.JFrame {
     DefaultTableModel model;
     int index = 0;
     CardLayout cardlayout;
+
     public FormMain() {
         initComponents();
-        cardlayout = (CardLayout)(PanelView.getLayout());
+        cardlayout = (CardLayout) (PanelView.getLayout());
         fillDataToTableSanPham();
     }
 
-    
     public void fillDataToTableSanPham() {
         SanPhamDAO cddao = new SanPhamDAO();
         listSanPham = cddao.getListSanPham();
@@ -64,7 +64,7 @@ public class FormMain extends javax.swing.JFrame {
         }
 //        tableSanPham.setModel(model);
     }
-    
+
     public void fillDataToTableNhaCungCap() {
         NhaCungCapDAO cddao = new NhaCungCapDAO();
         listNhaCungCap = cddao.getListNhaCungCap();
@@ -90,7 +90,7 @@ public class FormMain extends javax.swing.JFrame {
         }
         tableNhaCungCap.setModel(model);
     }
-    
+
     public void fillDataToTableNhanVien() {
         NhanVienDAO nvdao = new NhanVienDAO();
         listNhanVien = nvdao.getListNhanVien();
@@ -799,6 +799,7 @@ public class FormMain extends javax.swing.JFrame {
         DangNhap qk = new DangNhap();
         qk.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         qk.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jpnDangXuatMouseClicked
 
     private void jpnQLSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnQLSanPhamMouseClicked
@@ -967,7 +968,6 @@ public class FormMain extends javax.swing.JFrame {
         qk.setVisible(true);
         fillDataToTableSanPham();
     }//GEN-LAST:event_btnThemSuaSanPhamActionPerformed
-
 
     public static void main(String args[]) {
 

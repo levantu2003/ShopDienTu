@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DAO;
+package DAO.XacThuc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,15 +18,15 @@ public class ConnectCSDL {
         Connection con = null;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            System.out.println("Tải driver");
+            System.out.println("Load driver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=BanLinhKienDienTu;integratedSecurity=false;encrypt=false;trustServerCertificate=true;";
             String user = "sa";
             String password = "123";
             con = DriverManager.getConnection(url, user, password);
-            System.out.println("Kết nối thành công");
+            System.out.println("Load sucessfully");
         } catch (Exception e) {
             e.printStackTrace();
-            throw new Exception("Kết nối thất bại: " + e.getMessage(), e);
+            throw new Exception("Load failed: " + e.getMessage(), e);
         }
         return con;
     }
