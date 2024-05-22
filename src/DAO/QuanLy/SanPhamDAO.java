@@ -21,17 +21,18 @@ public class SanPhamDAO {
 
     public int addSanPham(SanPham sp) {
         try {
-            String sql = "INSERT INTO SanPham(MaSP,TenSP,NgaySanXuat,GiaNhap,GiaBan,TrangThai,MaLoai)"
-                    + "VALUES(?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO SanPham(MaSP,TenSP,GiaBan,MoTa,NgaySanXuat,TinhTrang,HinhAnh,MaLoai)"
+                    + "VALUES(?,?,?,?,?,?,?,?)";
             Connection con = ConnectCSDL.OpenConnection();
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, sp.getMaSP());
             ps.setString(2, sp.getTenSP());
-            ps.setDate(3, new java.sql.Date(sp.getNgaySanXuat().getTime()));
-            ps.setDouble(4, sp.getGiaNhap());
-            ps.setDouble(5, sp.getGiaBan());
-            ps.setInt(6, sp.getTrangThai());
-            ps.setString(7, sp.getMaLoai());
+            ps.setDouble(3, sp.getGiaBan());
+            ps.setString(4, sp.getMoTa());
+            ps.setDate(5, new java.sql.Date(sp.getNgaySanXuat().getTime()));
+            ps.setInt(6, sp.getTinhTrang());
+            ps.setBytes(7, sp.getHinhAnh());
+            ps.setString(8, sp.getMaLoai());
             return ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,17 +55,18 @@ public class SanPhamDAO {
 
     public int updateSanPham(SanPham sp) {
         try {
-            String sql = "UPDATE SanPham set TenSP=?,NgaySanXuat=?,GiaNhap=?,GiaBan=?,TrangThai=?,MaLoai=?"
+            String sql = "UPDATE SanPham set TenSP=?,GiaBan=?,MoTa=?,NgaySanXuat=?,TrangThai=?,HinhAnh=?,MaLoai=?"
                     + " WHERE MaSP=?";
             Connection con = ConnectCSDL.OpenConnection();
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, sp.getTenSP());
-            ps.setDate(2, new java.sql.Date(sp.getNgaySanXuat().getTime()));
-            ps.setDouble(3, sp.getGiaNhap());
-            ps.setDouble(4, sp.getGiaBan());
-            ps.setInt(5, sp.getTrangThai());
-            ps.setString(6, sp.getMaLoai());
-            ps.setString(7, sp.getMaSP());
+            ps.setDouble(2, sp.getGiaBan());
+            ps.setString(3, sp.getMoTa());
+            ps.setDate(4, new java.sql.Date(sp.getNgaySanXuat().getTime()));
+            ps.setInt(5, sp.getTinhTrang());
+            ps.setBytes(6, sp.getHinhAnh());
+            ps.setString(7, sp.getMaLoai());
+            ps.setString(8, sp.getMaSP());
             return ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,19 +85,14 @@ public class SanPhamDAO {
             }
             String sql = "SELECT sp.MaSP, sp.TenSP, sp.NgaySanXuat, sp.GiaNhap, sp.GiaBan "
                     + "FROM SanPham sp "
-                    + "INNER JOIN LoaiSanPham lsp ON sp.MaLoai = lsp.MaLoai "
-                    + "WHERE sp.MaSP LIKE N'%" + DuLieu + "%' OR sp.TenSP LIKE N'%" + DuLieu + "%' OR lsp.TenLoai LIKE N'%" + DuLieu + "%'";
+                    + "WHERE sp.TenSP LIKE N'%" + DuLieu + "%'";
             
             Connection con = ConnectCSDL.OpenConnection();
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                String MaSP = rs.getString("MaSP");
                 String TenSP = rs.getString("TenSP");
-                Date NgaySanXuat = rs.getDate("NgaySanXuat");
-                float GiaNhap = rs.getFloat("GiaNhap");
-                float GiaBan = rs.getFloat("GiaBan");
-                SanPham cd = new SanPham(MaSP, TenSP, NgaySanXuat, GiaNhap, GiaBan);
+                SanPham cd = new SanPham(TenSP);
                 list.add(cd);
             }
         } catch (Exception e) {
@@ -107,7 +104,7 @@ public class SanPhamDAO {
     public ArrayList<SanPham> getListSanPham() {
         ArrayList<SanPham> list = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM SanPham";
+            String sql = "SELECT MaSP,TenSP,GiaBan,NgaySanXuat,TinhTrang,HinhAnh FROM SanPham";
             Connection con = ConnectCSDL.OpenConnection();
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery(sql);
@@ -115,10 +112,11 @@ public class SanPhamDAO {
                 SanPham sp = new SanPham();
                 sp.setMaSP(rs.getString("MaSP"));
                 sp.setTenSP(rs.getString("TenSP"));
-                sp.setMaLoai(rs.getString("MaLoai"));
-                sp.setNgaySanXuat(rs.getDate("NgaySanXuat"));
-                sp.setGiaNhap(rs.getFloat("GiaNhap"));
                 sp.setGiaBan(rs.getFloat("GiaBan"));
+                sp.setNgaySanXuat(rs.getDate("NgaySanXuat"));
+                sp.setTinhTrang(rs.getInt("TinhTrang"));
+                sp.setHinhAnh(rs.getBytes("HinhAnh"));
+               
                 list.add(sp);
             }
         } catch (Exception e) {
@@ -126,5 +124,29 @@ public class SanPhamDAO {
         }
 
         return list;
+    }
+    
+    public SanPham timTheoID(String MaSV) throws Exception {
+        String sql = "Select * From students where MaSV = ?";
+        try {
+            Connection con = ConnectCSDL.OpenConnection();
+            PreparedStatement pstm = con.prepareStatement(sql);
+            pstm.setString(1, MaSV);
+            try (ResultSet rs = pstm.executeQuery()) {
+                if (rs.next()) {
+                    SanPham sp = new SanPham();
+                    sp.setMaSP(rs.getString(1));
+                    sp.setTenSP(rs.getString(2));
+                    sp.setGiaBan(Float.parseFloat(rs.getString(3)));
+                    sp.setNgaySanXuat(rs.getDate(5));
+                    sp.setTinhTrang(rs.getInt(6));
+                    sp.setHinhAnh(rs.getBytes(7));
+                    return sp;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null; // Trả về null nếu không tìm thấy
     }
 }

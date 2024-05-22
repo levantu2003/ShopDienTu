@@ -12,23 +12,34 @@ import java.util.Date;
  */
 public class SanPham {
 
-    private String MaSP, TenSP, MaLoai;
+    private String MaSP;
+    private String TenSP;
+    private Float GiaBan;
+    private String MoTa;
     private Date NgaySanXuat;
-    private float GiaNhap, GiaBan;
-    private int TrangThai;
-
-    public SanPham(String MaSP, String TenSP, Date NgaySanXuat, float GiaNhap, float GiaBan) {
-        this.MaSP = MaSP;
-        this.TenSP = TenSP;
-        this.NgaySanXuat = NgaySanXuat;
-        this.GiaNhap = GiaNhap;
-        this.GiaBan = GiaBan;
-    }
+    private int TinhTrang;
+    private byte[] HinhAnh;
+    private String MaLoai;
 
     public SanPham() {
     }
 
-    ;
+    public SanPham(String MaSP, String TenSP, Float GiaBan, String MoTa, Date NgaySanXuat, int TinhTrang, byte[] HinhAnh, String MaLoai) {
+        this.MaSP = MaSP;
+        this.TenSP = TenSP;
+        this.GiaBan = GiaBan;
+        this.MoTa = MoTa;
+        this.NgaySanXuat = NgaySanXuat;
+        this.TinhTrang = TinhTrang;
+        this.HinhAnh = HinhAnh;
+        this.MaLoai = MaLoai;
+    }
+
+    public SanPham(String TenSP) {
+        this.TenSP = TenSP;
+    }
+    
+    
 
     public String getMaSP() {
         return MaSP;
@@ -46,12 +57,20 @@ public class SanPham {
         this.TenSP = TenSP;
     }
 
-    public String getMaLoai() {
-        return MaLoai;
+    public Float getGiaBan() {
+        return GiaBan;
     }
 
-    public void setMaLoai(String MaLoai) {
-        this.MaLoai = MaLoai;
+    public void setGiaBan(Float GiaBan) {
+        this.GiaBan = GiaBan;
+    }
+
+    public String getMoTa() {
+        return MoTa;
+    }
+
+    public void setMoTa(String MoTa) {
+        this.MoTa = MoTa;
     }
 
     public Date getNgaySanXuat() {
@@ -62,28 +81,31 @@ public class SanPham {
         this.NgaySanXuat = NgaySanXuat;
     }
 
-    public float getGiaNhap() {
-        return GiaNhap;
+    public int getTinhTrang() {
+        return TinhTrang;
     }
 
-    public void setGiaNhap(float GiaNhap) {
-        this.GiaNhap = GiaNhap;
+    public void setTinhTrang(int TinhTrang) {
+        this.TinhTrang = TinhTrang;
     }
 
-    public float getGiaBan() {
-        return GiaBan;
+    public byte[] getHinhAnh() {
+        return HinhAnh;
     }
 
-    public void setGiaBan(float GiaBan) {
-        this.GiaBan = GiaBan;
+    public void setHinhAnh(byte[] HinhAnh) {
+        this.HinhAnh = HinhAnh;
     }
 
-    public int getTrangThai() {
-        return TrangThai;
+    public String getMaLoai() {
+        return MaLoai;
     }
 
-    public void setTrangThai(int TrangThai) {
-        this.TrangThai = TrangThai;
+    public void setMaLoai(String MaLoai) {
+        this.MaLoai = MaLoai;
     }
+    
+    
+    
 
 }
