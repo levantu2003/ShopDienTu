@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/latu2/OneDrive/Tài%20liệu/GitHub/QuanLyLinhKien/src/Model/SanPham.java</file>
-            <file>file:/C:/Users/latu2/OneDrive/Tài%20liệu/GitHub/QuanLyLinhKien/src/DAO/QuanLy/SanPhamDAO.java</file>
-            <file>file:/C:/Users/latu2/OneDrive/Tài%20liệu/GitHub/QuanLyLinhKien/src/View/QuanLy/frmSanPham.java</file>
-            <file>file:/C:/Users/latu2/OneDrive/Tài%20liệu/GitHub/QuanLyLinhKien/src/View/Tong/FormMain.java</file>
+            <file>file:/C:/Users/Kaiser/Documents/GitHub/QuanLyLinhKien/src/Model/phieuHoaDon.java</file>
+            <file>file:/C:/Users/Kaiser/Documents/GitHub/QuanLyLinhKien/src/DAO/QuanLy/HoaDonDAO.java</file>
+            <file>file:/C:/Users/Kaiser/Documents/GitHub/QuanLyLinhKien/src/View/Tong/FormMain.java</file>
+            <file>file:/C:/Users/Kaiser/Documents/GitHub/QuanLyLinhKien/src/DAO/QuanLy/NhaCungCapDAO.java</file>
         </group>
     </open-files>
 </project-private>
