@@ -242,14 +242,14 @@ public class frmSanPham extends javax.swing.JFrame {
             Logger.getLogger(frmSanPham.class.getName()).log(Level.SEVERE, null, ex);
         }
         byte[] imageBytes = null;
-            if (imgPath != null && !imgPath.isEmpty()) {
-                imageBytes = readImageFile(imgPath);
-            } else {
+        if (imgPath != null && !imgPath.isEmpty()) {
+            imageBytes = readImageFile(imgPath);
+        } else {
 
-                imageBytes = readImageFile("src/Images/hinh1.jpg");
-            }
+            imageBytes = readImageFile("src/Images/hinh1.jpg");
+        }
 
-            sp.setHinhAnh(imageBytes);
+        sp.setHinhAnh(imageBytes);
         sp.setTinhTrang(Integer.parseInt(txtTrangThai.getText()));
         sp.setMaLoai(txtMaLoai.getText());
         int x =cddao.addSanPham(sp);
@@ -284,7 +284,14 @@ public class frmSanPham extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(frmSanPham.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        byte[] imageBytes = null;
+        if (imgPath != null && !imgPath.isEmpty()) {
+            imageBytes = readImageFile(imgPath);
+        } else {
+
+            imageBytes = readImageFile("src/Images/hinh1.jpg");
+        }
+        sp.setHinhAnh(imageBytes);
         sp.setTinhTrang(Integer.parseInt(txtTrangThai.getText()));
         sp.setMaLoai(txtMaLoai.getText());
         int x =cddao.updateSanPham(sp);

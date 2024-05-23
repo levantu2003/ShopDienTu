@@ -89,9 +89,8 @@ public class FormMain extends javax.swing.JFrame {
         listSanPham = cddao.getListSanPham();
         model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
-        int i = 1;
         for (SanPham sp : listSanPham) {
-            Object[] row = new Object[]{i++, sp.getMaSP(), sp.getTenSP(), sp.getGiaBan(), sp.getNgaySanXuat(), sp.getTinhTrang(), sp.getHinhAnh()};
+            Object[] row = new Object[]{ sp.getMaSP(), sp.getTenSP(), sp.getGiaBan(), sp.getNgaySanXuat(), sp.getTinhTrang(), sp.getHinhAnh()};
             model.addRow(row);
         }
         tableSanPham.setModel(model);
@@ -102,12 +101,11 @@ public class FormMain extends javax.swing.JFrame {
         listSanPham = cddao.searchSanPham(btnTimKiemSanPham.getText());
         model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
-        int i = 1;
         for (SanPham sp : listSanPham) {
-            Object[] row = new Object[]{i++, sp.getMaSP(), sp.getTenSP(), sp.getGiaBan(), sp.getNgaySanXuat(), sp.getTinhTrang(), sp.getHinhAnh()};
+            Object[] row = new Object[]{ sp.getMaSP(), sp.getTenSP(), sp.getGiaBan(), sp.getNgaySanXuat(), sp.getTinhTrang(), sp.getHinhAnh()};
             model.addRow(row);
         }
-//        tableSanPham.setModel(model);
+        tableSanPham.setModel(model);
     }
 
     public void fillDataToTableNhaCungCap() {
@@ -131,7 +129,6 @@ public class FormMain extends javax.swing.JFrame {
         int i = 1;
         for (NhaCungCap cd : listNhaCungCap) {
             model.addRow(new Object[]{i++, cd.getMaNCC(), cd.getTenNCC(), cd.getSdt(), cd.getDiaChi(), cd.getEmail()});
-//            model.addRow(row);
         }
         tableNhaCungCap.setModel(model);
     }
@@ -582,18 +579,18 @@ public class FormMain extends javax.swing.JFrame {
 
         tableSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã sản phẩm", "Tên sản phẩm", "Giá bán", "Ngày sản xuất", "Tình Trạng", "Hình ảnh"
+                "Mã sản phẩm", "Tên sản phẩm", "Giá bán", "Ngày sản xuất", "Tình Trạng", "Hình ảnh"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1294,7 +1291,7 @@ public class FormMain extends javax.swing.JFrame {
         NhanVien nv = new NhanVien();
         try {
 
-            fillDataSearchToTableSanPham();
+            fillDataSearchToTableNhanVien();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1320,11 +1317,9 @@ public class FormMain extends javax.swing.JFrame {
 
     private void btnXoaSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSanPhamActionPerformed
         SanPhamDAO cddao = new SanPhamDAO();
-
         int selectedRow = tableSanPham.getSelectedRow();
         int columnIndex = 1;
         String cellValue = null;
-
         if (selectedRow != -1) {
             Object value = tableSanPham.getValueAt(selectedRow, columnIndex);
             cellValue = value.toString();
@@ -1351,32 +1346,59 @@ public class FormMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemSuaSanPhamActionPerformed
 
     private void tableSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableSanPhamMouseClicked
+//        try {
+//            int dong = tableSanPham.getSelectedRow();
+//            if (dong >= 0) {
+//                String id = (String) tableSanPham.getValueAt(dong, 0);
+//                SanPhamDAO dao = new SanPhamDAO();
+//                SanPham sp = dao.timTheoID(id);
+//                if (sp != null) {
+//                    LabelDeTailMaSP.setText(sp.getMaSP());
+//                    LabelDeTailTenSP.setText(sp.getTenSP());
+//                    LabelDeTailGiaBan.setText(String.valueOf(sp.getGiaBan()));
+//                    LabelDeTailNgaySanXuat.setText(sp.getNgaySanXuat().toString());
+//                    if (sp.getTinhTrang() == 1) {
+//                        LabelDeTailTinhTrang.setText("Mới");
+//                    } else {
+//                        LabelDeTailTinhTrang.setText("Cũ");
+//                    }
+//                    loadHinh(sp.getHinhAnh());
+//                }
+//
+//            } else {
+//                JOptionPane.showMessageDialog(this, "Bạn chưa thêm 1 dòng vào bảng");
+//                return;
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
         try {
             int dong = tableSanPham.getSelectedRow();
             if (dong >= 0) {
-                String id = (String) tableSanPham.getValueAt(dong, 0);
+                Object idObj = tableSanPham.getValueAt(dong, 0);
+                String id = idObj.toString(); // Chuyển đổi đối tượng thành chuỗi bất kể kiểu của nó
                 SanPhamDAO dao = new SanPhamDAO();
-                SanPham st = dao.timTheoID(id);
-                if (st != null) {
-                    LabelDeTailMaSP.setText(st.getMaSP());
-                    LabelDeTailTenSP.setText(st.getTenSP());
-                    LabelDeTailGiaBan.setText(String.valueOf(st.getGiaBan()));
-                    LabelDeTailNgaySanXuat.setText(st.getNgaySanXuat().toString());
-                    if (st.getTinhTrang() == 1) {
-                        LabelDeTailTinhTrang.setText("Mới");
-                    } else {
-                        LabelDeTailTinhTrang.setText("Cũ");
-                    }
-                    loadHinh(st.getHinhAnh());
+                SanPham sp = dao.timTheoID(id);
+                if (sp != null) {
+                    LabelDeTailMaSP.setText(sp.getMaSP());
+                    LabelDeTailTenSP.setText(sp.getTenSP());
+                    LabelDeTailGiaBan.setText(String.valueOf(sp.getGiaBan()));
+                    LabelDeTailNgaySanXuat.setText(sp.getNgaySanXuat().toString());
+                    LabelDeTailTinhTrang.setText(sp.getTinhTrang() == 1 ? "Mới" : "Cũ");
+                    loadHinh(sp.getHinhAnh());
+                } else {
+                    JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm với ID: " + id, "Lỗi", JOptionPane.ERROR_MESSAGE);
                 }
-
             } else {
-                JOptionPane.showMessageDialog(this, "Bạn chưa thêm 1 dòng vào bảng");
-                return;
+                JOptionPane.showMessageDialog(this, "Bạn chưa chọn một dòng nào trong bảng", "Thông báo", JOptionPane.WARNING_MESSAGE);
             }
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
+
+
     }//GEN-LAST:event_tableSanPhamMouseClicked
 
     private void jlbQLHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbQLHoaDonMouseClicked

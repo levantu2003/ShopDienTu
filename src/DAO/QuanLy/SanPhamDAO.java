@@ -55,7 +55,7 @@ public class SanPhamDAO {
 
     public int updateSanPham(SanPham sp) {
         try {
-            String sql = "UPDATE SanPham set TenSP=?,GiaBan=?,MoTa=?,NgaySanXuat=?,TrangThai=?,HinhAnh=?,MaLoai=?"
+            String sql = "UPDATE SanPham set TenSP=?,GiaBan=?,MoTa=?,NgaySanXuat=?,TinhTrang=?,HinhAnh=?,MaLoai=?"
                     + " WHERE MaSP=?";
             Connection con = ConnectCSDL.OpenConnection();
             PreparedStatement ps = con.prepareStatement(sql);
@@ -83,24 +83,30 @@ public class SanPhamDAO {
             } else if (DuLieu.chars().allMatch(Character::isDigit)) {
                 so = Float.parseFloat(DuLieu);
             }
-            String sql = "SELECT sp.MaSP, sp.TenSP, sp.NgaySanXuat, sp.GiaNhap, sp.GiaBan "
-                    + "FROM SanPham sp "
-                    + "WHERE sp.TenSP LIKE N'%" + DuLieu + "%'";
-            
+            String sql = "SELECT MaSP,TenSP,GiaBan,NgaySanXuat,TinhTrang,HinhAnh "
+                    + "FROM SanPham "
+                    + "WHERE TenSP LIKE N'%" + DuLieu + "%' ;";
+
             Connection con = ConnectCSDL.OpenConnection();
+
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
+                String MaSP = rs.getString("MaSP");
                 String TenSP = rs.getString("TenSP");
-                SanPham cd = new SanPham(TenSP);
-                list.add(cd);
+                Float GiaBan = rs.getFloat("GiaBan");
+                Date NgaySanXuat = rs.getDate("NgaySanXuat");
+                int TinhTrang = rs.getInt("TinhTrang");
+                byte[] HinhAnh = rs.getBytes("HinhAnh");
+                SanPham sp = new SanPham(MaSP, TenSP, GiaBan, NgaySanXuat, TinhTrang, HinhAnh);
+                list.add(sp);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
     }
-    
+
     public ArrayList<SanPham> getListSanPham() {
         ArrayList<SanPham> list = new ArrayList<>();
         try {
@@ -116,7 +122,7 @@ public class SanPhamDAO {
                 sp.setNgaySanXuat(rs.getDate("NgaySanXuat"));
                 sp.setTinhTrang(rs.getInt("TinhTrang"));
                 sp.setHinhAnh(rs.getBytes("HinhAnh"));
-               
+
                 list.add(sp);
             }
         } catch (Exception e) {
@@ -125,9 +131,9 @@ public class SanPhamDAO {
 
         return list;
     }
-    
+
     public SanPham timTheoID(String MaSV) throws Exception {
-        String sql = "Select * From students where MaSV = ?";
+        String sql = "Select * From SanPham where MaSP = ?";
         try {
             Connection con = ConnectCSDL.OpenConnection();
             PreparedStatement pstm = con.prepareStatement(sql);

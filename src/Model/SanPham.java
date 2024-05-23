@@ -35,9 +35,17 @@ public class SanPham {
         this.MaLoai = MaLoai;
     }
 
-    public SanPham(String TenSP) {
+    public SanPham(String MaSP, String TenSP, Float GiaBan, Date NgaySanXuat, int TinhTrang, byte[] HinhAnh) {
+        this.MaSP = MaSP;
         this.TenSP = TenSP;
+        this.GiaBan = GiaBan;
+        this.NgaySanXuat = NgaySanXuat;
+        this.TinhTrang = TinhTrang;
+        this.HinhAnh = HinhAnh;
     }
+
+    
+
     
     
 
