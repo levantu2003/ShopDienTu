@@ -382,3 +382,4 @@ SELECT * FROM Kho_SanPham;
 SELECT * FROM ThongKeHoaDon;
 SELECT * FROM ThongKePhieuNhap;
 SELECT * FROM PhanQuyen;
+
