@@ -10,20 +10,16 @@ package Model;
  */
 public class NhaCungCap {
 
-    private String MaNCC, TenNCC, Sdt, DiaChi, Email;
-
-    public NhaCungCap(String MaNCC, String TenNCC, String Sdt, String DiaChi, String Email) {
-        this.MaNCC = MaNCC;
-        this.TenNCC = TenNCC;
-        this.Sdt = Sdt;
-        this.DiaChi = DiaChi;
-        this.Email = Email;
-    }
+    private String MaNCC, TenNCC, DiaChi;
 
     public NhaCungCap() {
     }
 
-    ;
+    public NhaCungCap(String MaNCC, String TenNCC, String DiaChi) {
+        this.MaNCC = MaNCC;
+        this.TenNCC = TenNCC;
+        this.DiaChi = DiaChi;
+    }
 
     public String getMaNCC() {
         return MaNCC;
@@ -41,14 +37,6 @@ public class NhaCungCap {
         this.TenNCC = TenNCC;
     }
 
-    public String getSdt() {
-        return Sdt;
-    }
-
-    public void setSdt(String Sdt) {
-        this.Sdt = Sdt;
-    }
-
     public String getDiaChi() {
         return DiaChi;
     }
@@ -57,12 +45,6 @@ public class NhaCungCap {
         this.DiaChi = DiaChi;
     }
 
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String Email) {
-        this.Email = Email;
-    }
+    
 
 }

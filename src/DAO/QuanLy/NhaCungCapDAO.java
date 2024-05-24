@@ -22,15 +22,13 @@ public class NhaCungCapDAO {
 
     public int addNhaCungCap(NhaCungCap ncc) {
         try {
-            String sql = "INSERT INTO NhaCungCap(MaNCC,TenNCC,Sdt,DiaChi,Email)"
-                    + "VALUES(?,?,?,?,?)";
+            String sql = "INSERT INTO NhaCungCap(MaNCC,TenNCC,DiaChiNCC)"
+                    + "VALUES(?,?,?)";
             Connection con = ConnectCSDL.OpenConnection();
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, ncc.getMaNCC());
             ps.setString(2, ncc.getTenNCC());
-            ps.setString(3, ncc.getSdt());
-            ps.setString(4, ncc.getDiaChi());
-            ps.setString(5, ncc.getEmail());
+            ps.setString(3, ncc.getDiaChi());
             return ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -53,45 +51,65 @@ public class NhaCungCapDAO {
 
     public int updateNhaCungCap(NhaCungCap ncc) {
         try {
-            String sql = "UPDATE NhaCungCap set TenNCC=?,Sdt=?,DiaChi=?,Email=? "
+            String sql = "UPDATE NhaCungCap set TenNCC=?,DiaChiNCC=? "
                     + "WHERE MaNCC=?";
             Connection con = ConnectCSDL.OpenConnection();
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, ncc.getTenNCC());
-            ps.setString(2, ncc.getSdt());
-            ps.setString(3, ncc.getDiaChi());
-            ps.setString(4, ncc.getEmail());
-            ps.setString(5, ncc.getMaNCC());
+            ps.setString(2, ncc.getDiaChi());
+            ps.setString(3, ncc.getMaNCC());
             return ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return -1;
     }
+    
+    public NhaCungCap searchNhaCungCap(String TenNCC) throws Exception {
+        String sql = "SELECT * FROM NhaCungCap WHERE TenNCC = ?";
 
-    public ArrayList<NhaCungCap> searchNhaCungCap(String DuLieu) {
-        ArrayList<NhaCungCap> list = new ArrayList<>();
         try {
-            String sql = "SELECT * "
-                    + "FROM NhaCungCap "
-                    + "WHERE MaNCC LIKE N'%" + DuLieu + "%' OR TenNCC LIKE N'%" + DuLieu + "%' OR Sdt LIKE N'%" + DuLieu + "%' OR DiaChi LIKE N'%" + DuLieu + "%' OR Email LIKE N'%" + DuLieu + "%'; ";
             Connection con = ConnectCSDL.OpenConnection();
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            while (rs.next()) {
-                String mancc = rs.getString("MaNCC");
-                String tenncc = rs.getString("TenNCC");
-                String sdt = rs.getString("Sdt");
-                String diachi = rs.getString("DiaChi");
-                String emial = rs.getString("Email");
-                NhaCungCap ncc = new NhaCungCap(mancc, tenncc, sdt, diachi, emial);
-                list.add(ncc);
+            PreparedStatement pstm = con.prepareStatement(sql);
+            pstm.setString(1, TenNCC);
+
+            try (ResultSet rs = pstm.executeQuery()) {
+                if (rs.next()) {
+                    NhaCungCap ncc = new NhaCungCap();
+                    ncc.setMaNCC(rs.getString("MaNCC"));
+                    ncc.setTenNCC(rs.getString("TenNCC"));
+                    ncc.setDiaChi(rs.getString("DiaChiNCC"));
+                    return ncc;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return list;
+
+        return null;
     }
+    
+//    public ArrayList<NhaCungCap> searchNhaCungCap(String DuLieu) {
+//        ArrayList<NhaCungCap> list = new ArrayList<>();
+//        try {
+//            String sql = "SELECT * "
+//                    + "FROM NhaCungCap "
+//                    + "WHERE TenNCC LIKE N'%" + DuLieu + "%'";
+//            Connection con = ConnectCSDL.OpenConnection();
+//            Statement st = con.createStatement();
+//            ResultSet rs = st.executeQuery(sql);
+//            while (rs.next()) {
+//                String mancc = rs.getString("MaNCC");
+//                String tenncc = rs.getString("TenNCC");
+//                String diachi = rs.getString("DiaChiNCC");
+//                NhaCungCap ncc = new NhaCungCap(mancc, tenncc,diachi);
+//                list.add(ncc);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return list;
+//    }
     
     public ArrayList<NhaCungCap> getListNhaCungCap(){
         ArrayList<NhaCungCap> list = new ArrayList<>();
@@ -104,9 +122,7 @@ public class NhaCungCapDAO {
                 NhaCungCap ncc = new NhaCungCap();
                 ncc.setMaNCC(rs.getString("MaNCC"));
                 ncc.setTenNCC(rs.getString("TenNCC"));
-                ncc.setSdt(rs.getString("Sdt"));
-                ncc.setDiaChi(rs.getString("DiaChi"));
-                ncc.setEmail(rs.getString("Email"));
+                ncc.setDiaChi(rs.getString("DiaChiNCC"));
                 list.add(ncc);
             }
         } catch (Exception e) {

@@ -93,7 +93,7 @@ public class FormMain extends javax.swing.JFrame {
         model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
         for (SanPham sp : listSanPham) {
-            Object[] row = new Object[]{ sp.getMaSP(), sp.getTenSP(), sp.getGiaBan(), sp.getNgaySanXuat(), sp.getTinhTrang(), sp.getHinhAnh()};
+            Object[] row = new Object[]{sp.getMaSP(), sp.getTenSP(), sp.getGiaBan(), sp.getNgaySanXuat(), sp.getTinhTrang(), sp.getHinhAnh()};
             model.addRow(row);
         }
         tableSanPham.setModel(model);
@@ -105,7 +105,7 @@ public class FormMain extends javax.swing.JFrame {
         model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
         for (SanPham sp : listSanPham) {
-            Object[] row = new Object[]{ sp.getMaSP(), sp.getTenSP(), sp.getGiaBan(), sp.getNgaySanXuat(), sp.getTinhTrang(), sp.getHinhAnh()};
+            Object[] row = new Object[]{sp.getMaSP(), sp.getTenSP(), sp.getGiaBan(), sp.getNgaySanXuat(), sp.getTinhTrang(), sp.getHinhAnh()};
             model.addRow(row);
         }
         tableSanPham.setModel(model);
@@ -118,23 +118,12 @@ public class FormMain extends javax.swing.JFrame {
         model.setRowCount(0);
         int i = 1;
         for (NhaCungCap cd : listNhaCungCap) {
-            Object[] row = new Object[]{i++, cd.getMaNCC(), cd.getTenNCC(), cd.getSdt(), cd.getDiaChi(), cd.getEmail()};
+            Object[] row = new Object[]{i++, cd.getMaNCC(), cd.getTenNCC(), cd.getDiaChi()};
             model.addRow(row);
         }
         tableNhaCungCap.setModel(model);
     }
 
-    public void fillDataSearchToTableNhaCungCap() {
-        NhaCungCapDAO cddao = new NhaCungCapDAO();
-        listNhaCungCap = cddao.searchNhaCungCap(btnTimKiemNhaCungCap.getText());
-        model = (DefaultTableModel) tableNhaCungCap.getModel();
-        model.setRowCount(0);
-        int i = 1;
-        for (NhaCungCap cd : listNhaCungCap) {
-            model.addRow(new Object[]{i++, cd.getMaNCC(), cd.getTenNCC(), cd.getSdt(), cd.getDiaChi(), cd.getEmail()});
-        }
-        tableNhaCungCap.setModel(model);
-    }
 
     public void fillDataToTableNhanVien() {
         NhanVienDAO nvdao = new NhanVienDAO();
@@ -823,18 +812,18 @@ public class FormMain extends javax.swing.JFrame {
 
         tableNhaCungCap.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "STT", "Mã NCC", "Tên NCC", "Số điện thoại", "Địa chỉ", "Email"
+                "STT", "Mã NCC", "Tên NCC", "Địa chỉ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1380,14 +1369,25 @@ public class FormMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaNhaCungCapActionPerformed
 
     private void btnTimKiemNhaCungCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemNhaCungCapActionPerformed
-        NhaCungCapDAO cddao = new NhaCungCapDAO();
-        NhaCungCap ncc = new NhaCungCap();
+        String tenncc = txtTimKiemNhaCungCap.getText();
         try {
-            listNhaCungCap = cddao.searchNhaCungCap(btnTimKiemNhaCungCap.getText());
-            fillDataSearchToTableNhaCungCap();
-        } catch (Exception e) {
-            e.printStackTrace();
+            NhaCungCapDAO nccdao = new NhaCungCapDAO();
+            NhaCungCap ncc = nccdao.searchNhaCungCap(tenncc);
+            DefaultTableModel model = (DefaultTableModel) tableNhaCungCap.getModel();
+            model.setRowCount(0);
+            int i = 1;
+            if (ncc != null) {
+                Object[] row = new Object[]{i++, ncc.getMaNCC(), ncc.getTenNCC(), ncc.getDiaChi()};
+                model.addRow(row);
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy khách hàng với mã KH: " + tenncc, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi khi tìm kiếm nhà cung cấp", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_btnTimKiemNhaCungCapActionPerformed
 
     private void btnRefreshNhaCungCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshNhaCungCapActionPerformed
@@ -1485,33 +1485,6 @@ public class FormMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemSuaSanPhamActionPerformed
 
     private void tableSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableSanPhamMouseClicked
-//        try {
-//            int dong = tableSanPham.getSelectedRow();
-//            if (dong >= 0) {
-//                String id = (String) tableSanPham.getValueAt(dong, 0);
-//                SanPhamDAO dao = new SanPhamDAO();
-//                SanPham sp = dao.timTheoID(id);
-//                if (sp != null) {
-//                    LabelDeTailMaSP.setText(sp.getMaSP());
-//                    LabelDeTailTenSP.setText(sp.getTenSP());
-//                    LabelDeTailGiaBan.setText(String.valueOf(sp.getGiaBan()));
-//                    LabelDeTailNgaySanXuat.setText(sp.getNgaySanXuat().toString());
-//                    if (sp.getTinhTrang() == 1) {
-//                        LabelDeTailTinhTrang.setText("Mới");
-//                    } else {
-//                        LabelDeTailTinhTrang.setText("Cũ");
-//                    }
-//                    loadHinh(sp.getHinhAnh());
-//                }
-//
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Bạn chưa thêm 1 dòng vào bảng");
-//                return;
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
         try {
             int dong = tableSanPham.getSelectedRow();
             if (dong >= 0) {
