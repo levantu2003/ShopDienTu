@@ -124,7 +124,6 @@ public class FormMain extends javax.swing.JFrame {
         tableNhaCungCap.setModel(model);
     }
 
-
     public void fillDataToTableNhanVien() {
         NhanVienDAO nvdao = new NhanVienDAO();
         listNhanVien = nvdao.getListNhanVien();
@@ -132,24 +131,12 @@ public class FormMain extends javax.swing.JFrame {
         model.setRowCount(0);
         int i = 1;
         for (NhanVien nv : listNhanVien) {
-            Object[] row = new Object[]{i++, nv.getMaNV(), nv.getSdt(), nv.getDiaChi(), nv.getNgaySinh(), nv.getGioiTinh(), nv.getMaCV()};
+            Object[] row = new Object[]{i++, nv.getMaNV(), nv.getHoTenNV(), nv.getGioiTinh(), nv.getSdt(), nv.getMaCV()};
             model.addRow(row);
         }
         tableNhanVien.setModel(model);
     }
 
-    public void fillDataSearchToTableNhanVien() {
-        NhanVienDAO nvdao = new NhanVienDAO();
-        listNhanVien = nvdao.searchNhanVien(btnTimKiemNhanVien.getText());
-        model = (DefaultTableModel) tableNhanVien.getModel();
-        model.setRowCount(0);
-        int i = 1;
-        for (NhanVien nv : listNhanVien) {
-            Object[] row = new Object[]{i++, nv.getMaNV(), nv.getSdt(), nv.getDiaChi(), nv.getNgaySinh(), nv.getGioiTinh(), nv.getMaCV()};
-            model.addRow(row);
-        }
-//        tableSanPham.setModel(model);
-    }
 
     public void fillDataToTableHoaDon() {
         HoaDonDAO hdDao = new HoaDonDAO();
@@ -206,8 +193,8 @@ public class FormMain extends javax.swing.JFrame {
         jlbQLHoaDon = new javax.swing.JLabel();
         jpnQLSanPham = new javax.swing.JPanel();
         jlbQLSanPham = new javax.swing.JLabel();
-        jpnQLTaiKhoan = new javax.swing.JPanel();
-        jlbQLTaiKhoan = new javax.swing.JLabel();
+        jpnQLNhanVien = new javax.swing.JPanel();
+        jlbQLNhanVien = new javax.swing.JLabel();
         jpnQLKhachHang = new javax.swing.JPanel();
         jlbQLKhachHang = new javax.swing.JLabel();
         jpnQLThongKe = new javax.swing.JPanel();
@@ -428,37 +415,37 @@ public class FormMain extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jpnQLTaiKhoan.setBackground(new java.awt.Color(102, 102, 102));
-        jpnQLTaiKhoan.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, null, null));
-        jpnQLTaiKhoan.addMouseListener(new java.awt.event.MouseAdapter() {
+        jpnQLNhanVien.setBackground(new java.awt.Color(102, 102, 102));
+        jpnQLNhanVien.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, null, null));
+        jpnQLNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jpnQLTaiKhoanMouseClicked(evt);
+                jpnQLNhanVienMouseClicked(evt);
             }
         });
 
-        jlbQLTaiKhoan.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jlbQLTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-account-management-25.png"))); // NOI18N
-        jlbQLTaiKhoan.setText("Quản lý tài khoản");
-        jlbQLTaiKhoan.addMouseListener(new java.awt.event.MouseAdapter() {
+        jlbQLNhanVien.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jlbQLNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-account-management-25.png"))); // NOI18N
+        jlbQLNhanVien.setText("Quản lý nhân viên");
+        jlbQLNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlbQLTaiKhoanMouseClicked(evt);
+                jlbQLNhanVienMouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout jpnQLTaiKhoanLayout = new javax.swing.GroupLayout(jpnQLTaiKhoan);
-        jpnQLTaiKhoan.setLayout(jpnQLTaiKhoanLayout);
-        jpnQLTaiKhoanLayout.setHorizontalGroup(
-            jpnQLTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnQLTaiKhoanLayout.createSequentialGroup()
+        javax.swing.GroupLayout jpnQLNhanVienLayout = new javax.swing.GroupLayout(jpnQLNhanVien);
+        jpnQLNhanVien.setLayout(jpnQLNhanVienLayout);
+        jpnQLNhanVienLayout.setHorizontalGroup(
+            jpnQLNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnQLNhanVienLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlbQLTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jlbQLNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jpnQLTaiKhoanLayout.setVerticalGroup(
-            jpnQLTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnQLTaiKhoanLayout.createSequentialGroup()
+        jpnQLNhanVienLayout.setVerticalGroup(
+            jpnQLNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnQLNhanVienLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlbQLTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addComponent(jlbQLNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -562,7 +549,7 @@ public class FormMain extends javax.swing.JFrame {
                     .addComponent(jpnQLHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpnQLNhaCungCap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpnQLSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpnQLTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpnQLNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpnQLKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpnQLThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -580,7 +567,7 @@ public class FormMain extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpnQLNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpnQLTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jpnQLNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpnQLHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -920,17 +907,17 @@ public class FormMain extends javax.swing.JFrame {
 
         tableNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "STT", "MaNV", "Số điện thoại", "Địa chỉ", "Ngày sinh", "Giới tính", "Chức vụ"
+                "MaNV", "Tên nhân viên", "Giới tính", "Số điện thoại", "Chức vụ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1324,15 +1311,15 @@ public class FormMain extends javax.swing.JFrame {
         fillDataToTableNhaCungCap();
     }//GEN-LAST:event_jlbQLNhaCungCapMouseClicked
 
-    private void jpnQLTaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnQLTaiKhoanMouseClicked
+    private void jpnQLNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnQLNhanVienMouseClicked
         cardlayout.show(PanelView, "PanelNhanVien");
         fillDataToTableNhanVien();
-    }//GEN-LAST:event_jpnQLTaiKhoanMouseClicked
+    }//GEN-LAST:event_jpnQLNhanVienMouseClicked
 
-    private void jlbQLTaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbQLTaiKhoanMouseClicked
+    private void jlbQLNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbQLNhanVienMouseClicked
         cardlayout.show(PanelView, "PanelNhanVien");
         fillDataToTableNhanVien();
-    }//GEN-LAST:event_jlbQLTaiKhoanMouseClicked
+    }//GEN-LAST:event_jlbQLNhanVienMouseClicked
 
     private void PanelSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelSanPhamMouseClicked
         cardlayout.show(PanelView, "PanelSanPham");
@@ -1369,10 +1356,10 @@ public class FormMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaNhaCungCapActionPerformed
 
     private void btnTimKiemNhaCungCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemNhaCungCapActionPerformed
-        String tenncc = txtTimKiemNhaCungCap.getText();
+        String mancc = txtTimKiemNhaCungCap.getText();
         try {
             NhaCungCapDAO nccdao = new NhaCungCapDAO();
-            NhaCungCap ncc = nccdao.searchNhaCungCap(tenncc);
+            NhaCungCap ncc = nccdao.searchNhaCungCap(mancc);
             DefaultTableModel model = (DefaultTableModel) tableNhaCungCap.getModel();
             model.setRowCount(0);
             int i = 1;
@@ -1380,7 +1367,7 @@ public class FormMain extends javax.swing.JFrame {
                 Object[] row = new Object[]{i++, ncc.getMaNCC(), ncc.getTenNCC(), ncc.getDiaChi()};
                 model.addRow(row);
             } else {
-                JOptionPane.showMessageDialog(this, "Không tìm thấy khách hàng với mã KH: " + tenncc, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Không tìm thấy khách hàng với mã NCC : " + mancc, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             }
 
         } catch (Exception ex) {
@@ -1426,13 +1413,23 @@ public class FormMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaNhanVienActionPerformed
 
     private void btnTimKiemNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemNhanVienActionPerformed
-        NhanVienDAO nvdao = new NhanVienDAO();
-        NhanVien nv = new NhanVien();
+        String manv = txtTimKiemNhanVien.getText();
         try {
+            NhanVienDAO nvdao = new NhanVienDAO();
+            NhanVien nv = nvdao.searchNhanVien(manv);
+            DefaultTableModel model = (DefaultTableModel) tableNhanVien.getModel();
+            model.setRowCount(0);
+            int i = 1;
+            if (nv != null) {
+                Object[] row = new Object[]{i++, nv.getMaNV(), nv.getHoTenNV(), nv.getGioiTinh(), nv.getSdt(), nv.getMaCV()};
+                model.addRow(row);
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy khách hàng với Mã NV: " + manv, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            }
 
-            fillDataSearchToTableNhanVien();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi khi tìm kiếm nhà cung cấp", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnTimKiemNhanVienActionPerformed
 
@@ -1909,16 +1906,16 @@ public class FormMain extends javax.swing.JFrame {
     private javax.swing.JLabel jlbQLHoaDon;
     private javax.swing.JLabel jlbQLKhachHang;
     private javax.swing.JLabel jlbQLNhaCungCap;
+    private javax.swing.JLabel jlbQLNhanVien;
     private javax.swing.JLabel jlbQLSanPham;
-    private javax.swing.JLabel jlbQLTaiKhoan;
     private javax.swing.JLabel jlbQLThongKe;
     private javax.swing.JLabel jlbTrangChu;
     private javax.swing.JPanel jpnDangXuat;
     private javax.swing.JPanel jpnQLHoaDon;
     private javax.swing.JPanel jpnQLKhachHang;
     private javax.swing.JPanel jpnQLNhaCungCap;
+    private javax.swing.JPanel jpnQLNhanVien;
     private javax.swing.JPanel jpnQLSanPham;
-    private javax.swing.JPanel jpnQLTaiKhoan;
     private javax.swing.JPanel jpnQLThongKe;
     private javax.swing.JPanel jpnTacVuNhanVien;
     private javax.swing.JPanel jpnTacVuSanPham;

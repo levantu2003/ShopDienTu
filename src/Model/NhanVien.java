@@ -12,17 +12,25 @@ import java.util.Date;
  */
 public class NhanVien {
 
-    private String MaNV, Sdt, DiaChi, GioiTinh, MaCV;
+    private String MaNV;
+    private String HoTenNV;
+    private String GioiTinh;
     private Date NgaySinh;
-
-    public NhanVien(String MaNV, String Sdt, String DiaChi, String GioiTinh, String MaCV, Date NgaySinh) {
+    private String Sdt;
+    private String DiaChi;
+    private String MaCV;
+ 
+    
+    public NhanVien(String MaNV, String HoTenNV, String GioiTinh, Date NgaySinh, String Sdt, String DiaChi, String MaCV) {
         this.MaNV = MaNV;
+        this.HoTenNV = HoTenNV;
+        this.GioiTinh = GioiTinh;
+        this.NgaySinh = NgaySinh;
         this.Sdt = Sdt;
         this.DiaChi = DiaChi;
-        this.GioiTinh = GioiTinh;
         this.MaCV = MaCV;
-        this.NgaySinh = NgaySinh;
     }
+    
 
     public NhanVien() {
     }
@@ -75,6 +83,14 @@ public class NhanVien {
 
     public void setNgaySinh(Date NgaySinh) {
         this.NgaySinh = NgaySinh;
+    }
+
+    public String getHoTenNV() {
+        return HoTenNV;
+    }
+
+    public void setHoTenNV(String HoTenNV) {
+        this.HoTenNV = HoTenNV;
     }
 
 }
