@@ -65,13 +65,13 @@ public class NhaCungCapDAO {
         return -1;
     }
     
-    public NhaCungCap searchNhaCungCap(String TenNCC) throws Exception {
-        String sql = "SELECT * FROM NhaCungCap WHERE TenNCC = ?";
+    public NhaCungCap searchNhaCungCap(String mancc) throws Exception {
+        String sql = "SELECT * FROM NhaCungCap WHERE MaNCC = ?";
 
         try {
             Connection con = ConnectCSDL.OpenConnection();
             PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, TenNCC);
+            pstm.setString(1, mancc);
 
             try (ResultSet rs = pstm.executeQuery()) {
                 if (rs.next()) {
