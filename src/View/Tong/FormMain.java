@@ -14,6 +14,7 @@ import Model.NhaCungCap;
 import Model.NhanVien;
 import Model.SanPham;
 import Model.phieuHoaDon;
+import View.QuanLy.frmHoaDon;
 import View.QuanLy.frmNhaCungCap;
 import View.QuanLy.frmNhanVien;
 import View.QuanLy.frmSanPham;
@@ -26,8 +27,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -123,7 +126,6 @@ public class FormMain extends javax.swing.JFrame {
         }
         tableNhaCungCap.setModel(model);
     }
-
 
     public void fillDataToTableNhanVien() {
         NhanVienDAO nvdao = new NhanVienDAO();
@@ -280,10 +282,11 @@ public class FormMain extends javax.swing.JFrame {
         btnHD_Sua = new javax.swing.JButton();
         btnHD_Xoa = new javax.swing.JButton();
         btnHD_TimKiemMaHD = new javax.swing.JButton();
-        btnHD_Luu = new javax.swing.JButton();
+        btnHD_InHoaDon = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         txtHD_TimKiemMaHD = new javax.swing.JTextField();
         btnHD_Them = new javax.swing.JButton();
+        btnHD_Luu = new javax.swing.JButton();
         PanelKhachHang = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbKhachHang = new javax.swing.JTable();
@@ -1114,7 +1117,7 @@ public class FormMain extends javax.swing.JFrame {
                 btnHD_SuaActionPerformed(evt);
             }
         });
-        PanelHoaDon.add(btnHD_Sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 360, -1, -1));
+        PanelHoaDon.add(btnHD_Sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 360, -1, -1));
 
         btnHD_Xoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnHD_Xoa.setText("Xóa");
@@ -1123,7 +1126,7 @@ public class FormMain extends javax.swing.JFrame {
                 btnHD_XoaActionPerformed(evt);
             }
         });
-        PanelHoaDon.add(btnHD_Xoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, -1, -1));
+        PanelHoaDon.add(btnHD_Xoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, -1, -1));
 
         btnHD_TimKiemMaHD.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnHD_TimKiemMaHD.setText("Tìm kiếm");
@@ -1134,14 +1137,14 @@ public class FormMain extends javax.swing.JFrame {
         });
         PanelHoaDon.add(btnHD_TimKiemMaHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 420, -1, -1));
 
-        btnHD_Luu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnHD_Luu.setText("Lưu");
-        btnHD_Luu.addActionListener(new java.awt.event.ActionListener() {
+        btnHD_InHoaDon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnHD_InHoaDon.setText("In hoá đơn");
+        btnHD_InHoaDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHD_LuuActionPerformed(evt);
+                btnHD_InHoaDonActionPerformed(evt);
             }
         });
-        PanelHoaDon.add(btnHD_Luu, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 360, -1, -1));
+        PanelHoaDon.add(btnHD_InHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 360, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel16.setText("Tìm kiếm mã HD:");
@@ -1156,6 +1159,15 @@ public class FormMain extends javax.swing.JFrame {
             }
         });
         PanelHoaDon.add(btnHD_Them, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, -1, -1));
+
+        btnHD_Luu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnHD_Luu.setText("Lưu");
+        btnHD_Luu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHD_LuuActionPerformed(evt);
+            }
+        });
+        PanelHoaDon.add(btnHD_Luu, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 360, -1, -1));
 
         PanelView.add(PanelHoaDon, "PanelHoaDon");
 
@@ -1510,7 +1522,6 @@ public class FormMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
 
-
     }//GEN-LAST:event_tableSanPhamMouseClicked
 
     private void jlbQLHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbQLHoaDonMouseClicked
@@ -1582,9 +1593,12 @@ public class FormMain extends javax.swing.JFrame {
                     txtHD_TenSanPham.setText(hd.getTenSP());
                     txtHD_HoTenNV.setText(hd.getHoTenNV());
                     txtHD_DonGia.setText(String.valueOf(hd.getDonGia()));
-                    txtHD_TongTien.setText(String.valueOf(hd.getTongTien()));
+                    txtHD_TongTien.setText(String.valueOf(hd.getSoLuong() * hd.getDonGia()));
                     txtHD_SoLuong.setText(String.valueOf(hd.getSoLuong()));
                     txtHD_NgayXuatHD.setText(hd.getNgayXuatHD().toString());
+
+                    frmHoaDon frm = new frmHoaDon();
+                    frm.setLabelValues(hd);
                 } else {
                     JOptionPane.showMessageDialog(this, "Không tìm thấy hóa đơn.");
                 }
@@ -1645,48 +1659,30 @@ public class FormMain extends javax.swing.JFrame {
         fillDataToTableHoaDon();
     }//GEN-LAST:event_btnHD_SuaActionPerformed
 
-    private void btnHD_LuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHD_LuuActionPerformed
-//        if (JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm hóa đơn không?", "Hỏi",
-//                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
-//            return;
-//        }
-//        try {
-//            String MaHD = txtMaHD.getText();
-//            float DonGia = Float.parseFloat(txtDonGia.getText());
-//            int SoLuong = Integer.parseInt(txtSoLuong.getText());
-//            float TongTien = Float.parseFloat(txtTongTien.getText());
-//            java.util.Date NgayXuatHD = new SimpleDateFormat("dd-MM-yyyy").parse(txtNgayXuatHD.getText());
-//            String TenKH = txtTenKH.getText();
-//            String Sdt = txtSoDienThoai.getText();
-//            String DiaChi = txtDiaChi.getText();
-//            String TenSP = txtTenSanPham.getText();
-//            String HoTenNV = txtHoTenNV.getText();
-//
-//            phieuHoaDon hd = new phieuHoaDon();
-//            hd.setMaHD(MaHD);
-//            hd.setDonGia(DonGia);
-//            hd.setSoLuong(SoLuong);
-//            hd.setTongTien(TongTien);
-//            hd.setNgayXuatHD(NgayXuatHD);
-//            hd.setTenKH(TenKH);
-//            hd.setSdt(Sdt);
-//            hd.setDiaChi(DiaChi);
-//            hd.setTenSP(TenSP);
-//            hd.setHoTenNV(HoTenNV);
-//
-//            HoaDonDAO dao = new HoaDonDAO();
-//            int result = dao.addHoaDon(hd);
-//            if (result == 1) {
-//                JOptionPane.showMessageDialog(this, "Thêm hóa đơn thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Thêm hóa đơn thất bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
-//            }
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//        fillDataToTableHoaDon();
+    private void btnHD_InHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHD_InHoaDonActionPerformed
+        frmHoaDon frm = new frmHoaDon();
 
-    }//GEN-LAST:event_btnHD_LuuActionPerformed
+        String maHD = txtHD_MaHD.getText();
+        String tenKH = txtHD_TenKH.getText();
+        String sdt = txtHD_SoDienThoai.getText();
+        String diaChi = txtHD_DiaChi.getText();
+        String tenSP = txtHD_TenSanPham.getText();
+        String hoTenNV = txtHD_HoTenNV.getText();
+        Float donGia = Float.parseFloat(txtHD_DonGia.getText());
+        int soLuong = Integer.parseInt(txtHD_SoLuong.getText());
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            Date ngayXuatHD = dateFormat.parse(txtHD_NgayXuatHD.getText());
+            phieuHoaDon hd = new phieuHoaDon(maHD, tenKH, sdt, diaChi, tenSP, hoTenNV, donGia, null, soLuong, ngayXuatHD);
+            frm.setLabelValues(hd);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        frm.setVisible(true);
+    }//GEN-LAST:event_btnHD_InHoaDonActionPerformed
 
     private void tbKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKhachHangMouseClicked
         try {
@@ -1829,6 +1825,10 @@ public class FormMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnKH_TimKiemMaKHActionPerformed
 
+    private void btnHD_LuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHD_LuuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnHD_LuuActionPerformed
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1855,6 +1855,7 @@ public class FormMain extends javax.swing.JFrame {
     private javax.swing.JPanel PanelSanPham;
     private javax.swing.JPanel PanelThongKe;
     private javax.swing.JPanel PanelView;
+    private javax.swing.JButton btnHD_InHoaDon;
     private javax.swing.JButton btnHD_Luu;
     private javax.swing.JButton btnHD_Sua;
     private javax.swing.JButton btnHD_Them;

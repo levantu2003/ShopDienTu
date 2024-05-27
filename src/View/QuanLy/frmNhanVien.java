@@ -170,7 +170,7 @@ public class frmNhanVien extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        NhanVienDAO nvdao =new NhanVienDAO();
+        NhanVienDAO nvdao = new NhanVienDAO();
         NhanVien nv = new NhanVien();
         nv.setMaNV(txtMaNV.getText());
         nv.setSdt(txtSdt.getText());
@@ -182,8 +182,8 @@ public class frmNhanVien extends javax.swing.JFrame {
         }
         nv.setGioiTinh(txtGioiTinh.getText());
         nv.setMaCV(txtMaCV.getText());
-        int x =nvdao.addNhanVien(nv);
-        if (x>0) {
+        int x = nvdao.addNhanVien(nv);
+        if (x > 0) {
             JOptionPane.showMessageDialog(this, "Thêm thành công!");
         } else {
             JOptionPane.showMessageDialog(this, "Thêm thất bại!");
@@ -201,7 +201,7 @@ public class frmNhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        NhanVienDAO nvdao =new NhanVienDAO();
+        NhanVienDAO nvdao = new NhanVienDAO();
         NhanVien nv = new NhanVien();
         nv.setMaNV(txtMaNV.getText());
         nv.setSdt(txtSdt.getText());
@@ -213,8 +213,8 @@ public class frmNhanVien extends javax.swing.JFrame {
         }
         nv.setGioiTinh(txtGioiTinh.getText());
         nv.setMaCV(txtMaCV.getText());
-        int x =nvdao.updateNhanVien(nv);
-        if (x>0) {
+        int x = nvdao.updateNhanVien(nv);
+        if (x > 0) {
             JOptionPane.showMessageDialog(this, "Sửa thành công!");
         } else {
             JOptionPane.showMessageDialog(this, "Sửa thất bại!");
@@ -228,7 +228,7 @@ public class frmNhanVien extends javax.swing.JFrame {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
 //        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
 //         */
 //        try {
 //            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -255,7 +255,6 @@ public class frmNhanVien extends javax.swing.JFrame {
 //            }
 //        });
 //    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnSua;
