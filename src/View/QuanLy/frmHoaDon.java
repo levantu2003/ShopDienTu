@@ -5,6 +5,7 @@
 package View.QuanLy;
 
 import Model.phieuHoaDon;
+import java.time.LocalDate;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -329,12 +330,22 @@ public class frmHoaDon extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public void setLabelValues(phieuHoaDon hd) {
+
+        LocalDate ngayHienTai = LocalDate.now();
+        int ngay = ngayHienTai.getDayOfMonth();
+        int thang = ngayHienTai.getMonthValue();
+        int nam = ngayHienTai.getYear();
+
         float thanhTien = hd.getSoLuong() * hd.getDonGia();
         float thueVAT = thanhTien * 10 / 100;
         float tongTien = thanhTien + thueVAT;
 
         int thueVATTron = Math.round(thueVAT);
         int tongTienTron = Math.round(tongTien);
+
+        lbfrmHoaDon_Ngay.setText(ngay + "");
+        lbfrmHoaDon_Thang.setText(thang + "");
+        lbfrmHoaDon_Nam.setText(nam + "");
 
         model = (DefaultTableModel) tbfrmHoaDon_BangHoaDon.getModel();
 
@@ -350,11 +361,6 @@ public class frmHoaDon extends javax.swing.JFrame {
         Object[] rowData = {stt, hd.getMaHD(), hd.getTenSP(), hd.getSoLuong(), donGiaTron, Math.round(thanhTien)};
         model.addRow(rowData);
 
-        // Thiết lập giá trị cho các label khác nếu cần
-        // lbfrmHoaDon_Ngay.setText(...);
-        // lbfrmHoaDon_Thang.setText(...);
-        // lbfrmHoaDon_Nam.setText(...);
-        // ...
     }
 
     public static void main(String args[]) {

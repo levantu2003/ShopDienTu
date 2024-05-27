@@ -5,11 +5,11 @@
 package DAO.QuanLy;
 
 import DAO.XacThuc.ConnectCSDL;
+import Model.phieuHoaDon;
 import java.sql.Connection;
-import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import Model.phieuHoaDon;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -148,56 +148,4 @@ public class HoaDonDAO {
         }
         return -1;
     }
-
-//    public int addHoaDon(phieuHoaDon hd) {
-//        try {
-//            Connection con = ConnectCSDL.OpenConnection();
-//            PreparedStatement psHoaDon = null;
-//            PreparedStatement psKhachHang = null;
-//            PreparedStatement psSanPham = null;
-//            PreparedStatement psNhanVien = null;
-//            PreparedStatement psHoaDonSanPham = null;
-//
-//            String sqlHoaDon = "INSERT INTO HoaDon (MaHD, DonGia, SoLuong, TongTien, NgayXuatHD, MaKH, MaNV) "
-//                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-//            psHoaDon = con.prepareStatement(sqlHoaDon);
-//            psHoaDon.setString(1, hd.MaHD);
-//            psHoaDon.setFloat(2, hd.DonGia != null ? hd.DonGia : null);
-//            psHoaDon.setInt(3, hd.SoLuong);
-//            psHoaDon.setFloat(4, hd.TongTien != null ? hd.TongTien : null);
-//            psHoaDon.setDate(5, hd.NgayXuatHD != null ? new java.sql.Date(hd.NgayXuatHD.getTime()) : null);
-//            psHoaDon.setString(6, hd.TenKH != null ? hd.TenKH : null);
-//            psHoaDon.setString(7, hd.HoTenNV != null ? hd.HoTenNV : null);
-//            psHoaDon.executeUpdate();
-//
-//            String sqlKhachHang = "INSERT INTO KhachHang (TenKH, Sdt, DiaChi) VALUES (?, ?, ?)";
-//            psKhachHang = con.prepareStatement(sqlKhachHang);
-//            psKhachHang.setString(1, hd.getTenKH());
-//            psKhachHang.setString(2, hd.getSdt());
-//            psKhachHang.setString(3, hd.getDiaChi());
-//            psKhachHang.executeUpdate();
-//
-//            String sqlSanPham = "INSERT INTO SanPham (TenSP) VALUES (?)";
-//            psSanPham = con.prepareStatement(sqlSanPham);
-//            psSanPham.setString(1, hd.getTenSP());
-//            psSanPham.executeUpdate();
-//
-//            String sqlNhanVien = "INSERT INTO NhanVien (HoTenNV) VALUES (?)";
-//            psNhanVien = con.prepareStatement(sqlNhanVien);
-//            psNhanVien.setString(1, hd.getHoTenNV());
-//            psNhanVien.executeUpdate();
-//
-//            String sqlHoaDonSanPham = "INSERT INTO HoaDon_SanPham (MaHD, MaSP) VALUES (?, ?)";
-//            psHoaDonSanPham = con.prepareStatement(sqlHoaDonSanPham);
-//            psHoaDonSanPham.setString(1, hd.getMaHD());
-//            psHoaDonSanPham.setString(2, hd.getTenSP());
-//            psHoaDonSanPham.executeUpdate();
-//            psHoaDon.executeUpdate();
-//
-//            return 1;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return -1;
-//    }
 }

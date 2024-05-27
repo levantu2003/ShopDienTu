@@ -14,13 +14,10 @@ import javax.swing.JOptionPane;
  */
 public class frmNhaCungCap extends javax.swing.JFrame {
 
-
     public frmNhaCungCap() {
         initComponents();
     }
 
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -132,13 +129,13 @@ public class frmNhaCungCap extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        NhaCungCapDAO cddao =new NhaCungCapDAO();
+        NhaCungCapDAO cddao = new NhaCungCapDAO();
         NhaCungCap ncc = new NhaCungCap();
         ncc.setMaNCC(txtMaNCC.getText());
         ncc.setTenNCC(txtTenNCC.getText());
         ncc.setDiaChi(txtDiaChi.getText());
-        int x =cddao.addNhaCungCap(ncc);
-        if (x>0) {
+        int x = cddao.addNhaCungCap(ncc);
+        if (x > 0) {
             JOptionPane.showMessageDialog(this, "Thêm thành công!");
             //            fillDataToTable(); // them vao danh sach SV
         } else {
@@ -153,13 +150,13 @@ public class frmNhaCungCap extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        NhaCungCapDAO cddao =new NhaCungCapDAO();
+        NhaCungCapDAO cddao = new NhaCungCapDAO();
         NhaCungCap ncc = new NhaCungCap();
         ncc.setMaNCC(txtMaNCC.getText());
         ncc.setTenNCC(txtTenNCC.getText());
         ncc.setDiaChi(txtDiaChi.getText());
-        int x =cddao.updateNhaCungCap(ncc);
-        if (x>0) {
+        int x = cddao.updateNhaCungCap(ncc);
+        if (x > 0) {
             JOptionPane.showMessageDialog(this, "Sửa thành công!");
             //            fillDataToTable(); // them vao danh sach SV
         } else {
@@ -167,12 +164,11 @@ public class frmNhaCungCap extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSuaActionPerformed
 
-    
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
 //        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
 //         */
 //        try {
 //            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -199,7 +195,6 @@ public class frmNhaCungCap extends javax.swing.JFrame {
 //            }
 //        });
 //    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnSua;

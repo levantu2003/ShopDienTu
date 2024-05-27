@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -33,11 +34,13 @@ public class DangNhap extends javax.swing.JFrame {
         initComponents();
         setTitle("Đăng nhập");
         setLocationRelativeTo(null);
-        pnDangNhap.setBackground(new Color(175, 217, 243, 90));
+        pnDangNhap.setBackground(new Color(175, 217, 243, 196));
         tudienDangNhap();
 
     }
     private boolean showPassword = false;
+    private ImageIcon eyeIcon = new ImageIcon(getClass().getResource("/Images/icon2/eye.png"));
+    private ImageIcon closeIcon = new ImageIcon(getClass().getResource("/Images/icon2/read.png"));
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -67,7 +70,7 @@ public class DangNhap extends javax.swing.JFrame {
 
         lbEmail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbEmail.setForeground(new java.awt.Color(255, 255, 255));
-        lbEmail.setText("Email:");
+        lbEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icon2/mail.png"))); // NOI18N
 
         txtEmail.setBackground(new java.awt.Color(175, 217, 243));
         txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -76,11 +79,11 @@ public class DangNhap extends javax.swing.JFrame {
 
         lbMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbMatKhau.setForeground(new java.awt.Color(255, 255, 255));
-        lbMatKhau.setText("Mật Khẩu:");
+        lbMatKhau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icon2/lock.png"))); // NOI18N
 
         lbDangNhap.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lbDangNhap.setForeground(new java.awt.Color(255, 255, 255));
-        lbDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/SignIn_Header.png"))); // NOI18N
+        lbDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icon2/user.png"))); // NOI18N
         lbDangNhap.setText("   Đăng nhập");
 
         btnLogIn.setBackground(new java.awt.Color(22, 72, 99));
@@ -112,7 +115,7 @@ public class DangNhap extends javax.swing.JFrame {
 
         hienMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         hienMatKhau.setForeground(new java.awt.Color(255, 255, 255));
-        hienMatKhau.setText("Hiện mật khẩu");
+        hienMatKhau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icon2/eye.png"))); // NOI18N
         hienMatKhau.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 hienMatKhauMouseClicked(evt);
@@ -124,64 +127,67 @@ public class DangNhap extends javax.swing.JFrame {
         pnDangNhapLayout.setHorizontalGroup(
             pnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnDangNhapLayout.createSequentialGroup()
+                .addContainerGap(79, Short.MAX_VALUE)
                 .addGroup(pnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnDangNhapLayout.createSequentialGroup()
-                        .addGap(195, 195, 195)
-                        .addComponent(lbDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnDangNhapLayout.createSequentialGroup()
-                        .addGap(75, 75, 75)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDangNhapLayout.createSequentialGroup()
+                        .addComponent(lbDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(147, 147, 147))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDangNhapLayout.createSequentialGroup()
                         .addGroup(pnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ckDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnDangNhapLayout.createSequentialGroup()
                                 .addGroup(pnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(pnDangNhapLayout.createSequentialGroup()
-                                        .addComponent(lbEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(8, 8, 8)
+                                        .addComponent(lbEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtEmail))
                                     .addGroup(pnDangNhapLayout.createSequentialGroup()
-                                        .addComponent(lbMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbMatKhau)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
-                                .addComponent(hienMatKhau)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDangNhapLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(hienMatKhau)))
+                        .addGap(36, 36, 36))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDangNhapLayout.createSequentialGroup()
-                        .addComponent(btnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(168, 168, 168))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDangNhapLayout.createSequentialGroup()
-                        .addComponent(txtTaoTKMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(202, 202, 202))))
+                        .addGroup(pnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDangNhapLayout.createSequentialGroup()
+                                .addComponent(txtTaoTKMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(49, 49, 49))
+                            .addComponent(btnLogIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(115, 115, 115))))
         );
         pnDangNhapLayout.setVerticalGroup(
             pnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnDangNhapLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(13, 13, 13)
                 .addComponent(lbDangNhap)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbEmail)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(pnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbMatKhau)
-                    .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(hienMatKhau))
                 .addGap(18, 18, 18)
+                .addGroup(pnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbEmail))
+                .addGroup(pnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnDangNhapLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addGroup(pnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hienMatKhau))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE))
+                    .addGroup(pnDangNhapLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbMatKhau)
+                        .addGap(21, 21, 21)))
                 .addComponent(ckDangNhap)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTaoTKMoi)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        getContentPane().add(pnDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 38, -1, -1));
+        getContentPane().add(pnDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
 
-        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/SignIn_Background.jpg"))); // NOI18N
-        getContentPane().add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 642, 403));
+        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icon2/pexels-jess-bailey-designs-788946.jpg"))); // NOI18N
+        getContentPane().add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 403));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -190,6 +196,7 @@ public class DangNhap extends javax.swing.JFrame {
         DangKy dk = new DangKy();
         dk.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         dk.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_txtTaoTKMoiMouseClicked
 
     private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
@@ -224,7 +231,6 @@ public class DangNhap extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogInActionPerformed
 
     private void hienMatKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hienMatKhauMouseClicked
-        showPassword = !showPassword;
         doiTrangThaiMK();
     }//GEN-LAST:event_hienMatKhauMouseClicked
 
@@ -255,7 +261,14 @@ public class DangNhap extends javax.swing.JFrame {
     private void doiTrangThaiMK() {
         char echoChar = showPassword ? '\u0000' : '*';
         txtMatKhau.setEchoChar(echoChar);
-        hienMatKhau.setText(showPassword ? "Ẩn mật khẩu" : "Hiển thị mật khẩu");
+
+        if (showPassword) {
+            hienMatKhau.setIcon(closeIcon);
+        } else {
+            hienMatKhau.setIcon(eyeIcon);
+        }
+
+        showPassword = !showPassword;
     }
 
     private void luuDangNhap(String email, String password) {

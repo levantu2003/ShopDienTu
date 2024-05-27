@@ -38,4 +38,22 @@ public class DangNhapDAO {
         }
         return nd;
     }
+
+    public String getNewMaND() {
+        try {
+            Connection con = ConnectCSDL.OpenConnection();
+            String query = "SELECT MAX(CAST(SUBSTRING(MaND, 3, LEN(MaND)) AS INT)) AS maxMaND FROM NguoiDung";
+            PreparedStatement statement = con.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+            int maxMaND = 0;
+            if (rs.next()) {
+                maxMaND = rs.getInt("maxMaND");
+            }
+            String newMaND = "ND" + String.format("%02d", maxMaND + 1);
+            return newMaND;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 }

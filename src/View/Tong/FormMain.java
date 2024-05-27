@@ -20,8 +20,13 @@ import View.QuanLy.frmNhanVien;
 import View.QuanLy.frmSanPham;
 import View.XacThuc.DangNhap;
 import java.awt.CardLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterJob;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -139,7 +144,6 @@ public class FormMain extends javax.swing.JFrame {
         }
         tableNhanVien.setModel(model);
     }
-
 
     public void fillDataToTableHoaDon() {
         HoaDonDAO hdDao = new HoaDonDAO();
@@ -1680,6 +1684,38 @@ public class FormMain extends javax.swing.JFrame {
         }
 
         frm.setVisible(true);
+
+        // In hoá đơn 
+        PrinterJob job = PrinterJob.getPrinterJob();
+        job.setJobName("In hoá đơn");
+
+        job.setPrintable(new Printable() {
+            public int print(Graphics pg, PageFormat pf, int pageNum) {
+                pf.setOrientation(PageFormat.LANDSCAPE);
+                if (pageNum > 0) {
+                    return Printable.NO_SUCH_PAGE;
+                }
+
+                Graphics2D g2 = (Graphics2D) pg;
+                g2.translate(pf.getImageableX(), pf.getImageableY());
+                g2.scale(0.47, 0.47);
+
+                frm.print(g2);
+
+                return Printable.PAGE_EXISTS;
+
+            }
+        });
+        boolean ok = job.printDialog();
+        if (ok) {
+            try {
+
+                job.print();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+
     }//GEN-LAST:event_btnHD_InHoaDonActionPerformed
 
     private void tbKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKhachHangMouseClicked
@@ -1824,7 +1860,7 @@ public class FormMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnKH_TimKiemMaKHActionPerformed
 
     private void btnHD_LuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHD_LuuActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnHD_LuuActionPerformed
 
     public static void main(String args[]) {
