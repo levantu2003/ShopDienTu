@@ -277,8 +277,6 @@ public class FormMain extends javax.swing.JFrame {
         btnHD_InHoaDon = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         txtHD_TimKiemMaHD = new javax.swing.JTextField();
-        btnHD_Them = new javax.swing.JButton();
-        btnHD_Luu = new javax.swing.JButton();
         PanelKhachHang = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbKhachHang = new javax.swing.JTable();
@@ -1109,7 +1107,7 @@ public class FormMain extends javax.swing.JFrame {
                 btnHD_SuaActionPerformed(evt);
             }
         });
-        PanelHoaDon.add(btnHD_Sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 360, -1, -1));
+        PanelHoaDon.add(btnHD_Sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, -1, -1));
 
         btnHD_Xoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnHD_Xoa.setText("Xóa");
@@ -1118,7 +1116,7 @@ public class FormMain extends javax.swing.JFrame {
                 btnHD_XoaActionPerformed(evt);
             }
         });
-        PanelHoaDon.add(btnHD_Xoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, -1, -1));
+        PanelHoaDon.add(btnHD_Xoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, -1, -1));
 
         btnHD_TimKiemMaHD.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnHD_TimKiemMaHD.setText("Tìm kiếm");
@@ -1142,24 +1140,6 @@ public class FormMain extends javax.swing.JFrame {
         jLabel16.setText("Tìm kiếm mã HD:");
         PanelHoaDon.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 119, -1));
         PanelHoaDon.add(txtHD_TimKiemMaHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 420, 420, -1));
-
-        btnHD_Them.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnHD_Them.setText("Thêm");
-        btnHD_Them.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHD_ThemActionPerformed(evt);
-            }
-        });
-        PanelHoaDon.add(btnHD_Them, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, -1, -1));
-
-        btnHD_Luu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnHD_Luu.setText("Lưu");
-        btnHD_Luu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHD_LuuActionPerformed(evt);
-            }
-        });
-        PanelHoaDon.add(btnHD_Luu, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 360, -1, -1));
 
         PanelView.add(PanelHoaDon, "PanelHoaDon");
 
@@ -1571,19 +1551,6 @@ public class FormMain extends javax.swing.JFrame {
         fillDataToTableHoaDon();
     }//GEN-LAST:event_btnHD_TimKiemMaHDActionPerformed
 
-    private void btnHD_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHD_ThemActionPerformed
-        txtHD_MaHD.setText("");
-        txtHD_TenKH.setText("");
-        txtHD_SoDienThoai.setText("");
-        txtHD_DiaChi.setText("");
-        txtHD_TenSanPham.setText("");
-        txtHD_HoTenNV.setText("");
-        txtHD_DonGia.setText("");
-        txtHD_TongTien.setText("");
-        txtHD_SoLuong.setText("");
-        txtHD_NgayXuatHD.setText("");
-    }//GEN-LAST:event_btnHD_ThemActionPerformed
-
     private void tbHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHoaDonMouseClicked
         try {
             int dong = tbHoaDon.getSelectedRow();
@@ -1689,7 +1656,7 @@ public class FormMain extends javax.swing.JFrame {
 
         frm.setVisible(true);
 
-        // In hoá đơn 
+        // In hoá đơn
         PrinterJob job = PrinterJob.getPrinterJob();
         job.setJobName("In hoá đơn");
 
@@ -1863,10 +1830,6 @@ public class FormMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnKH_TimKiemMaKHActionPerformed
 
-    private void btnHD_LuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHD_LuuActionPerformed
-
-    }//GEN-LAST:event_btnHD_LuuActionPerformed
-
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1894,9 +1857,7 @@ public class FormMain extends javax.swing.JFrame {
     private javax.swing.JPanel PanelThongKe;
     private javax.swing.JPanel PanelView;
     private javax.swing.JButton btnHD_InHoaDon;
-    private javax.swing.JButton btnHD_Luu;
     private javax.swing.JButton btnHD_Sua;
-    private javax.swing.JButton btnHD_Them;
     private javax.swing.JButton btnHD_TimKiemMaHD;
     private javax.swing.JButton btnHD_Xoa;
     private javax.swing.JButton btnKH_Luu;
