@@ -101,7 +101,7 @@ public class FormMain extends javax.swing.JFrame {
         model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
         for (SanPham sp : listSanPham) {
-            Object[] row = new Object[]{sp.getMaSP(), sp.getTenSP(), sp.getGiaBan(), sp.getNgaySanXuat(), sp.getTinhTrang(), sp.getHinhAnh()};
+            Object[] row = new Object[]{sp.getMaSP(), sp.getTenSP(), sp.getGiaBan(), sp.getNgaySanXuat(), sp.getTinhTrang()== 1 ? "Còn hàng" : "Hết hàng", sp.getHinhAnh()};
             model.addRow(row);
         }
         tableSanPham.setModel(model);
@@ -1453,25 +1453,34 @@ public class FormMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTimKiemSanPhamActionPerformed
 
     private void btnXoaSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSanPhamActionPerformed
-        SanPhamDAO cddao = new SanPhamDAO();
-        int selectedRow = tableSanPham.getSelectedRow();
-        int columnIndex = 1;
-        String cellValue = null;
-        if (selectedRow != -1) {
-            Object value = tableSanPham.getValueAt(selectedRow, columnIndex);
-            cellValue = value.toString();
-        }
 
-        if (cellValue != null) {
-            int x = cddao.removeSanPham(cellValue);
-            if (x > 0) {
-                JOptionPane.showMessageDialog(this, "Xóa thành công!");
-                fillDataToTableSanPham();
-            } else {
-                JOptionPane.showMessageDialog(this, "Xóa thất bại!");
+        try {
+            SanPhamDAO cddao = new SanPhamDAO();
+
+            int selectedRow = tableSanPham.getSelectedRow();
+            int columnIndex = 0;
+            String cellValue = null;
+            if (selectedRow != -1) {
+                Object value = tableSanPham.getValueAt(selectedRow, columnIndex);
+                cellValue = value.toString();
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một hàng để xóa!");
+
+            if (cellValue != null) {
+                int confirm = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá nhân viên này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    int x = cddao.removeSanPham(cellValue);
+                    if (x > 0) {
+                        JOptionPane.showMessageDialog(this, "Xóa thành công!");
+                        fillDataToTableSanPham();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Xóa thất bại!");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Vui lòng chọn một hàng để xóa!");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_btnXoaSanPhamActionPerformed
 
@@ -1495,7 +1504,7 @@ public class FormMain extends javax.swing.JFrame {
                     LabelDeTailTenSP.setText(sp.getTenSP());
                     LabelDeTailGiaBan.setText(String.valueOf(sp.getGiaBan()));
                     LabelDeTailNgaySanXuat.setText(sp.getNgaySanXuat().toString());
-                    LabelDeTailTinhTrang.setText(sp.getTinhTrang() == 1 ? "Mới" : "Cũ");
+                    LabelDeTailTinhTrang.setText(sp.getTinhTrang() == 1 ? "Còn hàng" : "Hết hàng");
                     loadHinh(sp.getHinhAnh());
                 } else {
                     JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm với ID: " + id, "Lỗi", JOptionPane.ERROR_MESSAGE);
