@@ -392,4 +392,4 @@ INSERT INTO HoaDon_SanPham (MaSP, MaHD) VALUES
 (N'SP02', N'HD01'),
 (N'SP03', N'HD01');
 
-select * from HoaDon_SanPham join HoaDon on HoaDon_SanPham.MaHD = HoaDon.MaHD join SanPham on HoaDon_SanPham.MaSP = SanPham.MaSP
+select HoaDon.MaHD, SanPham.MaSP, HoaDon.DonGia, HoaDon.SoLuong, HoaDon.TongTien, HoaDon.NgayXuatHD, KhachHang.TenKH, KhachHang.Sdt, KhachHang.DiaChi, SanPham.TenSP, NhanVien.HoTenNV from HoaDon_SanPham join HoaDon on HoaDon_SanPham.MaHD = HoaDon.MaHD join SanPham on HoaDon_SanPham.MaSP = SanPham.MaSP join KhachHang on HoaDon.MaKH = KhachHang.MaKH join NhanVien on HoaDon.MaNV = NhanVien.MaNV

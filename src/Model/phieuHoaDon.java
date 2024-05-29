@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class phieuHoaDon {
 
-    private String MaHD, TenKH, Sdt, DiaChi, TenSP, HoTenNV;
+    private String MaHD, TenKH, Sdt, DiaChi, TenSP, HoTenNV, MaSP;
     private Float DonGia, TongTien;
     private int SoLuong;
     private Date NgayXuatHD;
@@ -20,17 +20,18 @@ public class phieuHoaDon {
     public phieuHoaDon() {
     }
 
-    public phieuHoaDon(String MaHD, String TenKH, String Sdt, String DiaChi, String TenSP, String HoTenNV, Float DonGia, Float TongTien, int SoLuong, Date NgayXuatHD) {
+    public phieuHoaDon(String MaHD, String MaSP, String TenKH, String Sdt, String DiaChi, String TenSP, String HoTenNV, Float DonGia, int SoLuong, Date NgayXuatHD) {
         this.MaHD = MaHD;
+        this.MaSP = MaSP;
         this.TenKH = TenKH;
         this.Sdt = Sdt;
         this.DiaChi = DiaChi;
         this.TenSP = TenSP;
         this.HoTenNV = HoTenNV;
         this.DonGia = DonGia;
-        this.TongTien = TongTien;
         this.SoLuong = SoLuong;
         this.NgayXuatHD = NgayXuatHD;
+        this.TongTien = DonGia * SoLuong;
     }
 
     public String getMaHD() {
@@ -79,6 +80,14 @@ public class phieuHoaDon {
 
     public void setHoTenNV(String HoTenNV) {
         this.HoTenNV = HoTenNV;
+    }
+
+    public String getMaSP() {
+        return MaSP;
+    }
+
+    public void setMaSP(String MaSP) {
+        this.MaSP = MaSP;
     }
 
     public Float getDonGia() {
