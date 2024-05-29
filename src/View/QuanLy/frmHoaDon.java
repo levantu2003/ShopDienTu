@@ -4,8 +4,12 @@
  */
 package View.QuanLy;
 
+import DAO.QuanLy.HoaDonDAO;
+import DAO.QuanLy.SanPhamDAO;
+import Model.SanPham;
 import Model.phieuHoaDon;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -329,23 +333,11 @@ public class frmHoaDon extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public void setLabelValues(phieuHoaDon hd) {
-
+    public void setLabelValues(phieuHoaDon hd) throws Exception {
         LocalDate ngayHienTai = LocalDate.now();
         int ngay = ngayHienTai.getDayOfMonth();
         int thang = ngayHienTai.getMonthValue();
         int nam = ngayHienTai.getYear();
-
-        float thanhTien = hd.getSoLuong() * hd.getDonGia();
-        float thueVAT = thanhTien * 10 / 100;
-        float tongTien = thanhTien + thueVAT;
-
-        int thueVATTron = Math.round(thueVAT);
-        int tongTienTron = Math.round(tongTien);
-
-        lbfrmHoaDon_Ngay.setText(ngay + "");
-        lbfrmHoaDon_Thang.setText(thang + "");
-        lbfrmHoaDon_Nam.setText(nam + "");
 
         model = (DefaultTableModel) tbfrmHoaDon_BangHoaDon.getModel();
 
@@ -353,14 +345,35 @@ public class frmHoaDon extends javax.swing.JFrame {
         lbfrmHoaDon_DiaChi.setText(hd.getDiaChi());
         lbfrmHoaDon_SoDienThoai.setText(hd.getSdt());
         lbformHoaDon_TenNhanVien.setText(hd.getHoTenNV());
+
+        ArrayList<String> listMaSP = new HoaDonDAO().getListSanPhamTheoMaHD(hd.getMaHD());
+
+        int stt = 1;
+        float tongThanhTien = 0;
+        for (String maSP : listMaSP) {
+            SanPhamDAO spDao = new SanPhamDAO();
+            SanPham sp = spDao.timTheoID(maSP);
+
+            int donGiaTron = Math.round(hd.getDonGia());
+            float thanhTien = hd.getSoLuong() * donGiaTron;
+            tongThanhTien += thanhTien;
+
+            Object[] rowData = {stt, maSP, sp.getTenSP(), hd.getSoLuong(), donGiaTron, Math.round(thanhTien)};
+            model.addRow(rowData);
+            stt++;
+        }
+
+        float thueVAT = tongThanhTien * 0.1f;
+        float tongTien = tongThanhTien + thueVAT;
+
+        int thueVATTron = Math.round(thueVAT);
+        int tongTienTron = Math.round(tongTien);
+
+        lbfrmHoaDon_Ngay.setText(ngay + "");
+        lbfrmHoaDon_Thang.setText(thang + "");
+        lbfrmHoaDon_Nam.setText(nam + "");
         lbfrmHoaDon_ThueVAT.setText(String.valueOf(thueVATTron));
         lbfrmHoaDon_TongTien.setText(String.valueOf(tongTienTron));
-
-        int stt = model.getRowCount() + 1;
-        int donGiaTron = Math.round(hd.getDonGia());
-        Object[] rowData = {stt, hd.getMaHD(), hd.getTenSP(), hd.getSoLuong(), donGiaTron, Math.round(thanhTien)};
-        model.addRow(rowData);
-
     }
 
     public static void main(String args[]) {
