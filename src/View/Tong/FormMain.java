@@ -1350,12 +1350,15 @@ public class FormMain extends javax.swing.JFrame {
             cellValue = value.toString();
         }
         if (cellValue != null) {
-            int x = cddao.removeNhaCungCap(cellValue);
-            if (x > 0) {
-                JOptionPane.showMessageDialog(this, "Xóa thành công!");
-                fillDataToTableNhaCungCap();
-            } else {
-                JOptionPane.showMessageDialog(this, "Xóa thất bại!");
+            int confirm = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá nhà cung cấp này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                int x = cddao.removeNhaCungCap(cellValue);
+                if (x > 0) {
+                    JOptionPane.showMessageDialog(this, "Xóa thành công!");
+                    fillDataToTableNhaCungCap();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa thất bại!");
+                }
             }
         } else {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn một nhà cung cấp để xóa!");
@@ -1400,19 +1403,20 @@ public class FormMain extends javax.swing.JFrame {
         int selectedRow = tableNhanVien.getSelectedRow();
         int columnIndex = 1;
         String cellValue = null;
-
         if (selectedRow != -1) {
             Object value = tableNhanVien.getValueAt(selectedRow, columnIndex);
             cellValue = value.toString();
         }
-
         if (cellValue != null) {
-            int x = cddao.removeNhanVien(cellValue);
-            if (x > 0) {
-                JOptionPane.showMessageDialog(this, "Xóa thành công!");
-                fillDataToTableNhanVien();
-            } else {
-                JOptionPane.showMessageDialog(this, "Xóa thất bại!");
+            int confirm = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá nhân viên này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                int x = cddao.removeNhanVien(cellValue);
+                if (x > 0) {
+                    JOptionPane.showMessageDialog(this, "Xóa thành công!");
+                    fillDataToTableNhanVien();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa thất bại!");
+                }
             }
         } else {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn một hàng để xóa!");
