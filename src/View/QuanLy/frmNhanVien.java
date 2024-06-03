@@ -191,22 +191,69 @@ public class frmNhanVien extends javax.swing.JFrame {
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         NhanVienDAO nvdao = new NhanVienDAO();
         NhanVien nv = new NhanVien();
-        nv.setMaNV(txtMaNV.getText());
-        nv.setHoTenNV(txtHoTenNV.getText());
-        nv.setSdt(txtSdt.getText());
-        nv.setDiaChi(txtDiaChi.getText());
+
+        // Kiểm tra mã nhân viên
+        if (txtMaNV.getText() != null && !txtMaNV.getText().trim().isEmpty()) {
+            nv.setMaNV(txtMaNV.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Mã Nhân viên!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra họ tên nhân viên
+        if (txtHoTenNV.getText() != null && !txtHoTenNV.getText().trim().isEmpty()) {
+            nv.setHoTenNV(txtHoTenNV.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Họ tên Nhân viên!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra số điện thoại
+        if (txtSdt.getText() != null && !txtSdt.getText().trim().isEmpty()) {
+            nv.setSdt(txtSdt.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Số điện thoại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra địa chỉ
+        if (txtDiaChi.getText() != null && !txtDiaChi.getText().trim().isEmpty()) {
+            nv.setDiaChi(txtDiaChi.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Địa chỉ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra ngày sinh
         try {
             nv.setNgaySinh(new SimpleDateFormat("dd-MM-yyyy").parse(txtNgaySinh.getText()));
         } catch (ParseException ex) {
-            Logger.getLogger(frmNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Định dạng ngày không hợp lệ. Vui lòng nhập theo định dạng dd-MM-yyyy.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        nv.setGioiTinh(txtGioiTinh.getText());
-        nv.setMaCV(txtMaCV.getText());
+
+        // Kiểm tra giới tính
+        if (txtGioiTinh.getText() != null && !txtGioiTinh.getText().trim().isEmpty()) {
+            nv.setGioiTinh(txtGioiTinh.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Giới tính!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra mã chức vụ
+        if (txtMaCV.getText() != null && !txtMaCV.getText().trim().isEmpty()) {
+            nv.setMaCV(txtMaCV.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Mã Chức vụ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Thêm nhân viên vào cơ sở dữ liệu
         int x = nvdao.addNhanVien(nv);
         if (x > 0) {
             JOptionPane.showMessageDialog(this, "Thêm thành công!");
         } else {
-            JOptionPane.showMessageDialog(this, "Thêm thất bại!");
+            JOptionPane.showMessageDialog(this, "Thêm thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnLuuActionPerformed
 
@@ -224,22 +271,69 @@ public class frmNhanVien extends javax.swing.JFrame {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         NhanVienDAO nvdao = new NhanVienDAO();
         NhanVien nv = new NhanVien();
-        nv.setMaNV(txtMaNV.getText());
-        nv.setHoTenNV(txtHoTenNV.getText());
-        nv.setSdt(txtSdt.getText());
-        nv.setDiaChi(txtDiaChi.getText());
+
+        // Kiểm tra mã nhân viên
+        if (txtMaNV.getText() != null && !txtMaNV.getText().trim().isEmpty()) {
+            nv.setMaNV(txtMaNV.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Mã Nhân viên!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra họ tên nhân viên
+        if (txtHoTenNV.getText() != null && !txtHoTenNV.getText().trim().isEmpty()) {
+            nv.setHoTenNV(txtHoTenNV.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Họ tên Nhân viên!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra số điện thoại
+        if (txtSdt.getText() != null && !txtSdt.getText().trim().isEmpty()) {
+            nv.setSdt(txtSdt.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Số điện thoại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra địa chỉ
+        if (txtDiaChi.getText() != null && !txtDiaChi.getText().trim().isEmpty()) {
+            nv.setDiaChi(txtDiaChi.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Địa chỉ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra ngày sinh
         try {
             nv.setNgaySinh(new SimpleDateFormat("dd-MM-yyyy").parse(txtNgaySinh.getText()));
         } catch (ParseException ex) {
-            Logger.getLogger(frmNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Định dạng ngày không hợp lệ. Vui lòng nhập theo định dạng dd-MM-yyyy.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        nv.setGioiTinh(txtGioiTinh.getText());
-        nv.setMaCV(txtMaCV.getText());
+
+        // Kiểm tra giới tính
+        if (txtGioiTinh.getText() != null && !txtGioiTinh.getText().trim().isEmpty()) {
+            nv.setGioiTinh(txtGioiTinh.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Giới tính!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra mã chức vụ
+        if (txtMaCV.getText() != null && !txtMaCV.getText().trim().isEmpty()) {
+            nv.setMaCV(txtMaCV.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Mã Chức vụ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Cập nhật nhân viên trong cơ sở dữ liệu
         int x = nvdao.updateNhanVien(nv);
         if (x > 0) {
             JOptionPane.showMessageDialog(this, "Sửa thành công!");
         } else {
-            JOptionPane.showMessageDialog(this, "Sửa thất bại!");
+            JOptionPane.showMessageDialog(this, "Sửa thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSuaActionPerformed
 

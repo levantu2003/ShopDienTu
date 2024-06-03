@@ -131,15 +131,38 @@ public class frmNhaCungCap extends javax.swing.JFrame {
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         NhaCungCapDAO cddao = new NhaCungCapDAO();
         NhaCungCap ncc = new NhaCungCap();
-        ncc.setMaNCC(txtMaNCC.getText());
-        ncc.setTenNCC(txtTenNCC.getText());
-        ncc.setDiaChi(txtDiaChi.getText());
+
+        // Kiểm tra mã nhà cung cấp
+        if (txtMaNCC.getText() != null && !txtMaNCC.getText().trim().isEmpty()) {
+            ncc.setMaNCC(txtMaNCC.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Mã Nhà cung cấp!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra tên nhà cung cấp
+        if (txtTenNCC.getText() != null && !txtTenNCC.getText().trim().isEmpty()) {
+            ncc.setTenNCC(txtTenNCC.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Tên Nhà cung cấp!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra địa chỉ
+        if (txtDiaChi.getText() != null && !txtDiaChi.getText().trim().isEmpty()) {
+            ncc.setDiaChi(txtDiaChi.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Địa chỉ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Thêm nhà cung cấp vào cơ sở dữ liệu
         int x = cddao.addNhaCungCap(ncc);
         if (x > 0) {
             JOptionPane.showMessageDialog(this, "Thêm thành công!");
-            //            fillDataToTable(); // them vao danh sach SV
+            // fillDataToTable(); // Thêm vào danh sách nhà cung cấp
         } else {
-            JOptionPane.showMessageDialog(this, "Thêm thất bại!");
+            JOptionPane.showMessageDialog(this, "Thêm thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnLuuActionPerformed
 
@@ -152,15 +175,38 @@ public class frmNhaCungCap extends javax.swing.JFrame {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         NhaCungCapDAO cddao = new NhaCungCapDAO();
         NhaCungCap ncc = new NhaCungCap();
-        ncc.setMaNCC(txtMaNCC.getText());
-        ncc.setTenNCC(txtTenNCC.getText());
-        ncc.setDiaChi(txtDiaChi.getText());
+
+        // Kiểm tra mã nhà cung cấp
+        if (txtMaNCC.getText() != null && !txtMaNCC.getText().trim().isEmpty()) {
+            ncc.setMaNCC(txtMaNCC.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Mã Nhà cung cấp!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra tên nhà cung cấp
+        if (txtTenNCC.getText() != null && !txtTenNCC.getText().trim().isEmpty()) {
+            ncc.setTenNCC(txtTenNCC.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Tên Nhà cung cấp!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra địa chỉ
+        if (txtDiaChi.getText() != null && !txtDiaChi.getText().trim().isEmpty()) {
+            ncc.setDiaChi(txtDiaChi.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Địa chỉ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Cập nhật nhà cung cấp trong cơ sở dữ liệu
         int x = cddao.updateNhaCungCap(ncc);
         if (x > 0) {
             JOptionPane.showMessageDialog(this, "Sửa thành công!");
-            //            fillDataToTable(); // them vao danh sach SV
+            // fillDataToTable(); // Thêm vào danh sách nhà cung cấp
         } else {
-            JOptionPane.showMessageDialog(this, "Sửa thất bại!");
+            JOptionPane.showMessageDialog(this, "Sửa thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSuaActionPerformed
 

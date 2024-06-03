@@ -383,13 +383,3 @@ SELECT * FROM ThongKeHoaDon;
 SELECT * FROM ThongKePhieuNhap;
 SELECT * FROM PhanQuyen;
 
-select * from HoaDon join KhachHang on HoaDon.MaKH = KhachHang.MaKH join NhanVien on HoaDon.MaNV = NhanVien.MaNV
-
-INSERT INTO HoaDon (MaHD, DonViTinh, DonGia, SoLuong, TongTien, NgayXuatHD, MaKH, MaNV) VALUES
-(N'HD01', N'Cái', 1500000, 2, 3000000, '2023-05-01', N'KH01', N'NV01');
-
-INSERT INTO HoaDon_SanPham (MaSP, MaHD) VALUES
-(N'SP02', N'HD01'),
-(N'SP03', N'HD01');
-
-select HoaDon.MaHD, SanPham.MaSP, HoaDon.DonGia, HoaDon.SoLuong, HoaDon.TongTien, HoaDon.NgayXuatHD, KhachHang.TenKH, KhachHang.Sdt, KhachHang.DiaChi, SanPham.TenSP, NhanVien.HoTenNV from HoaDon_SanPham join HoaDon on HoaDon_SanPham.MaHD = HoaDon.MaHD join SanPham on HoaDon_SanPham.MaSP = SanPham.MaSP join KhachHang on HoaDon.MaKH = KhachHang.MaKH join NhanVien on HoaDon.MaNV = NhanVien.MaNV

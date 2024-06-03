@@ -313,6 +313,7 @@ public class FormMain extends javax.swing.JFrame {
 
         jlbTrangChu.setBackground(new java.awt.Color(255, 255, 255));
         jlbTrangChu.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        jlbTrangChu.setForeground(new java.awt.Color(0, 0, 0));
         jlbTrangChu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-store-30.png"))); // NOI18N
         jlbTrangChu.setText("Quản lý\n\n\n\n cửa hàng"); // NOI18N
 
@@ -526,6 +527,7 @@ public class FormMain extends javax.swing.JFrame {
         });
 
         jlbDangXuat.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jlbDangXuat.setForeground(new java.awt.Color(0, 0, 0));
         jlbDangXuat.setText("Đăng xuất");
         jlbDangXuat.setAlignmentY(0.0F);
         jlbDangXuat.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -799,7 +801,7 @@ public class FormMain extends javax.swing.JFrame {
                 .addComponent(jScrollPaneSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(PanelDetailSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         PanelView.add(PanelSanPham, "PanelSanPham");
@@ -907,7 +909,7 @@ public class FormMain extends javax.swing.JFrame {
                 .addComponent(JpnTacVuNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPaneNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
 
         PanelView.add(PanelNhaCungCap, "PanelNhaCungCap");
@@ -1018,7 +1020,7 @@ public class FormMain extends javax.swing.JFrame {
                 .addComponent(jpnTacVuNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPaneNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         PanelView.add(PanelNhanVien, "PanelNhanVien");
@@ -1273,7 +1275,7 @@ public class FormMain extends javax.swing.JFrame {
         );
         PanelThongKeLayout.setVerticalGroup(
             PanelThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 492, Short.MAX_VALUE)
+            .addGap(0, 477, Short.MAX_VALUE)
         );
 
         PanelView.add(PanelThongKe, "PanelThongKe");

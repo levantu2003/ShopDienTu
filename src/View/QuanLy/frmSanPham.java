@@ -26,6 +26,7 @@ import javax.swing.JOptionPane;
 public class frmSanPham extends javax.swing.JFrame {
 
     String imgPath = "";
+
     public frmSanPham() {
         initComponents();
     }
@@ -43,6 +44,7 @@ public class frmSanPham extends javax.swing.JFrame {
             return null;
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -230,34 +232,87 @@ public class frmSanPham extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        SanPhamDAO cddao =new SanPhamDAO();
+        SanPhamDAO cddao = new SanPhamDAO();
         SanPham sp = new SanPham();
-        sp.setMaSP(txtMaSP.getText());
-        sp.setTenSP(txtTenSP.getText());
-        sp.setMoTa(txtMoTa.getText());
-        sp.setGiaBan(parseFloat(txtGiaBan.getText()));
+
+        // Kiểm tra mã sản phẩm
+        if (txtMaSP.getText() != null && !txtMaSP.getText().trim().isEmpty()) {
+            sp.setMaSP(txtMaSP.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Mã Sản phẩm!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra tên sản phẩm
+        if (txtTenSP.getText() != null && !txtTenSP.getText().trim().isEmpty()) {
+            sp.setTenSP(txtTenSP.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Tên Sản phẩm!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra mô tả sản phẩm
+        if (txtMoTa.getText() != null && !txtMoTa.getText().trim().isEmpty()) {
+            sp.setMoTa(txtMoTa.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Mô tả Sản phẩm!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra giá bán
+        try {
+            float giaBan = Float.parseFloat(txtGiaBan.getText());
+            if (giaBan > 0) {
+                sp.setGiaBan(giaBan);
+            } else {
+                JOptionPane.showMessageDialog(this, "Giá Sản phẩm không thể âm hoặc bằng 0!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập giá hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra ngày sản xuất
         try {
             sp.setNgaySanXuat(new SimpleDateFormat("dd-MM-yyyy").parse(txtNgaySanXuat.getText()));
         } catch (ParseException ex) {
-            Logger.getLogger(frmSanPham.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Định dạng ngày không hợp lệ. Vui lòng nhập theo định dạng dd-MM-yyyy.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+
+        // Kiểm tra và đặt hình ảnh
         byte[] imageBytes = null;
         if (imgPath != null && !imgPath.isEmpty()) {
             imageBytes = readImageFile(imgPath);
         } else {
-
             imageBytes = readImageFile("src/Images/hinh1.jpg");
         }
-
         sp.setHinhAnh(imageBytes);
-        sp.setTinhTrang(Integer.parseInt(txtTrangThai.getText()));
-        sp.setMaLoai(txtMaLoai.getText());
-        int x =cddao.addSanPham(sp);
-        if (x>0) {
-            JOptionPane.showMessageDialog(this, "Thêm thành công!");
-//            fillDataToTable(); // them vao danh sach SV
+
+        // Kiểm tra tình trạng
+        try {
+            sp.setTinhTrang(Integer.parseInt(txtTrangThai.getText()));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tình trạng hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra mã loại
+        if (txtMaLoai.getText() != null && !txtMaLoai.getText().trim().isEmpty()) {
+            sp.setMaLoai(txtMaLoai.getText());
         } else {
-            JOptionPane.showMessageDialog(this, "Thêm thất bại!");
+            JOptionPane.showMessageDialog(this, "Không thể để trống Mã Loại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Thêm sản phẩm vào cơ sở dữ liệu
+        int x = cddao.addSanPham(sp);
+        if (x > 0) {
+            JOptionPane.showMessageDialog(this, "Thêm thành công!");
+            // fillDataToTable(); // Thêm vào danh sách sản phẩm
+        } else {
+            JOptionPane.showMessageDialog(this, "Thêm thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnLuuActionPerformed
 
@@ -274,38 +329,85 @@ public class frmSanPham extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        SanPhamDAO cddao =new SanPhamDAO();
+        SanPhamDAO cddao = new SanPhamDAO();
         SanPham sp = new SanPham();
-        sp.setMaSP(txtMaSP.getText());
-        sp.setTenSP(txtTenSP.getText());
-        sp.setGiaBan(parseFloat(txtGiaBan.getText()));
+
+        // Kiểm tra mã sản phẩm
+        if (txtMaSP.getText() != null && !txtMaSP.getText().trim().isEmpty()) {
+            sp.setMaSP(txtMaSP.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Mã Sản phẩm!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra tên sản phẩm
+        if (txtTenSP.getText() != null && !txtTenSP.getText().trim().isEmpty()) {
+            sp.setTenSP(txtTenSP.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể để trống Tên Sản phẩm!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra giá bán
+        try {
+            float giaBan = Float.parseFloat(txtGiaBan.getText());
+            if (giaBan > 0) {
+                sp.setGiaBan(giaBan);
+            } else {
+                JOptionPane.showMessageDialog(this, "Giá Sản phẩm không thể âm hoặc bằng 0!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập giá hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra ngày sản xuất
         try {
             sp.setNgaySanXuat(new SimpleDateFormat("dd-MM-yyyy").parse(txtNgaySanXuat.getText()));
         } catch (ParseException ex) {
-            Logger.getLogger(frmSanPham.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Định dạng ngày không hợp lệ. Vui lòng nhập theo định dạng dd-MM-yyyy.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+
+        // Kiểm tra và đặt hình ảnh
         byte[] imageBytes = null;
         if (imgPath != null && !imgPath.isEmpty()) {
             imageBytes = readImageFile(imgPath);
         } else {
-
             imageBytes = readImageFile("src/Images/hinh1.jpg");
         }
         sp.setHinhAnh(imageBytes);
-        sp.setTinhTrang(Integer.parseInt(txtTrangThai.getText()));
-        sp.setMaLoai(txtMaLoai.getText());
-        int x =cddao.updateSanPham(sp);
-        if (x>0) {
-            JOptionPane.showMessageDialog(this, "Sửa thành công!");
-//            fillDataToTable(); // them vao danh sach SV
+
+        // Kiểm tra tình trạng
+        try {
+            sp.setTinhTrang(Integer.parseInt(txtTrangThai.getText()));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tình trạng hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra mã loại
+        if (txtMaLoai.getText() != null && !txtMaLoai.getText().trim().isEmpty()) {
+            sp.setMaLoai(txtMaLoai.getText());
         } else {
-            JOptionPane.showMessageDialog(this, "Sửa thất bại!");
+            JOptionPane.showMessageDialog(this, "Không thể để trống Mã Loại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Cập nhật sản phẩm trong cơ sở dữ liệu
+        int x = cddao.updateSanPham(sp);
+        if (x > 0) {
+            JOptionPane.showMessageDialog(this, "Sửa thành công!");
+            // fillDataToTable(); // Thêm vào danh sách sản phẩm
+        } else {
+            JOptionPane.showMessageDialog(this, "Sửa thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnMoHinhSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoHinhSanPhamActionPerformed
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        fileChooser.setCurrentDirectory(new File("C:\\Users\\latu2\\Downloads\\QuanLyLinhKien\\src\\Images"));
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
         int result = fileChooser.showOpenDialog(this);
@@ -318,7 +420,6 @@ public class frmSanPham extends javax.swing.JFrame {
             Image img = icon.getImage().getScaledInstance(153, 133, Image.SCALE_SMOOTH);
             labelHinhSanPham.setIcon(new ImageIcon(img));
         }
-
     }//GEN-LAST:event_btnMoHinhSanPhamActionPerformed
 
     private void txtMaLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaLoaiActionPerformed
